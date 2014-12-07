@@ -8,5 +8,8 @@
     <string name="menuCampaign">Campaign</string>
     <string name="campaignscreen">Campaign Map</string>
     <string name="mainmenugraphic">Main Menu</string>
+    <string name="title_activity_first_level">PrairieLand Adventures First Campagin Level</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

@@ -29,8 +29,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
             android:layout_gravity="center"
-            android:background="@drawable/map"
+            android:background="@drawable/maptwo"
             android:contentDescription="Campaign Map" />
+
+        <ImageButton
+            android:layout_width="109dp"
+            android:layout_height="134dp"
+            android:id="@+id/btn1stlevel"
+            android:layout_gravity="left|bottom"
+            android:onClick="launchFirstLevel" />
 
     </FrameLayout>
 

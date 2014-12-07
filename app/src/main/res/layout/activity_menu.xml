@@ -6,6 +6,7 @@
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
+
     <TextView android:id="@+id/fullscreen_content" android:layout_width="match_parent"
         android:layout_height="match_parent" android:keepScreenOn="true" android:textColor="#33b5e5"
         android:textStyle="bold" android:textSize="50sp" android:gravity="center"
@@ -29,19 +30,40 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageView2"
             android:layout_gravity="center"
-            android:background="@drawable/menu"
+            android:background="@drawable/menuvtwo"
             android:contentDescription="@string/mainmenugraphic" />
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/menuCampaign"
-            android:id="@+id/Campaign"
-            android:layout_gravity="center"
-            android:onClick="launchGame"
-            android:background="@color/primary_material_dark"
-            android:textColor="@color/abc_primary_text_material_light" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <ImageButton
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/Campaign"
+                android:layout_gravity="center_horizontal"
+                android:onClick="launchGame" />
+
+            <ImageButton
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/Multiplayer"
+                android:layout_gravity="center_horizontal" />
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/Shop"
+                android:layout_gravity="center_horizontal" />
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/Quit"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
 
     </FrameLayout>
 
