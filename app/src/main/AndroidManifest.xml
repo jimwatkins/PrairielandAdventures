@@ -32,6 +32,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.bigskyway.skyler.prairielandadventures.MainScreenActivity" />
         </activity>
+        <activity
+            android:name=".Shop"
+            android:label="@string/title_activity_shop" >
+        </activity>
+        <activity
+            android:name=".Unlock"
+            android:label="@string/title_activity_unlock"
+            android:parentActivityName=".Shop" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.bigskyway.skyler.prairielandadventures.Shop" />
+        </activity>
     </application>
 
 </manifest>

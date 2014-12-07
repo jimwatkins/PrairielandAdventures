@@ -4,15 +4,37 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 public class FirstLevel extends ActionBarActivity {
+    int health = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_level);
+        TextView txtHealth = (TextView) findViewById(R.id.TxtHealth);
+        txtHealth.setText("Health: " + Integer.toString(health));
+        findViewById(R.id.ivsnake3).setOnTouchListener(mSnakeTouch);
+
     }
+    View.OnTouchListener mSnakeTouch = new View.OnTouchListener()  {
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            ImageView ivsnake = (ImageView) v;
+          ivsnake.setBackground(getResources().getDrawable(R.drawable.attackingsnakeposthree));
+//                toggleAlpha(v);
+  //              shakeImage(v);
+    //            changeImage (v);
+
+            return true;
+        }
+    };
 
 
     @Override

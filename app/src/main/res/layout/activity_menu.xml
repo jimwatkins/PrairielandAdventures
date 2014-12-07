@@ -55,7 +55,8 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/Shop"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+            android:onClick="launchShop" />
 
             <ImageButton
                 android:layout_width="60dp"

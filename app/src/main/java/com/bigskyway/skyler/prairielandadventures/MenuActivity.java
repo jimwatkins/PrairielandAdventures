@@ -124,6 +124,11 @@ public class MenuActivity extends Activity {
         Intent intent = new Intent(this, MainScreenActivity.class);
         startActivity(intent);
     }
+    public void launchShop(View view) {
+        Log.i("Launching Screen", "Shop");
+        Intent intent = new Intent(this, Shop.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

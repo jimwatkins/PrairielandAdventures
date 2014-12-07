@@ -11,5 +11,7 @@
     <string name="title_activity_first_level">PrairieLand Adventures First Campagin Level</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_shop">Adventurer\'s Shop</string>
+    <string name="title_activity_unlock">Unlocked Pete!</string>
 
 </resources>
