@@ -26,8 +26,8 @@ public class FirstLevel extends ActionBarActivity {
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            ImageView ivsnake = (ImageView) v;
-          ivsnake.setBackground(getResources().getDrawable(R.drawable.attackingsnakeposthree));
+            ImageView ivSnake = (ImageView) v;
+          ivSnake.setBackground(getResources().getDrawable(R.drawable.attackingsnakeposthree));
 //                toggleAlpha(v);
   //              shakeImage(v);
     //            changeImage (v);
