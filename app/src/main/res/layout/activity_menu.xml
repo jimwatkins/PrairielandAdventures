@@ -10,14 +10,6 @@
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
 
-    <LinearLayout android:id="@+id/fullscreen_content_controls" style="?metaButtonBarStyle"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        tools:ignore="UselessParent">
-
-    </LinearLayout>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="250dp"
