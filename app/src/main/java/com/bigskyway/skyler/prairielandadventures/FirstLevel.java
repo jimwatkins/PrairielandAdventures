@@ -1,13 +1,20 @@
 package com.bigskyway.skyler.prairielandadventures;
 
+import android.content.res.AssetManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.DataInputStream;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class FirstLevel extends ActionBarActivity {
@@ -21,7 +28,12 @@ public class FirstLevel extends ActionBarActivity {
         txtHealth.setText("Health: " + Integer.toString(health));
         findViewById(R.id.ivsnake3).setOnTouchListener(mSnakeTouch);
 
+        Map<String,String> test = getWords("spanish_words.txt");
+        Log.i("hola", test.get("hola"));
+
     }
+
+
     View.OnTouchListener mSnakeTouch = new View.OnTouchListener()  {
 
         @Override
@@ -41,6 +53,7 @@ public class FirstLevel extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_first_level, menu);
+
         return true;
     }
 
@@ -57,5 +70,38 @@ public class FirstLevel extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public Map<String, String> getWords(String file) {
+        Map<String,String> words = new HashMap<String,String>();
+
+        AssetManager assets = getAssets();
+        String line = "";
+
+        try {
+            InputStream is;
+            is = assets.open(file);
+
+
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+
+            // byte buffer into a string
+             line = new String(buffer);
+        }
+
+        catch (Exception ex) {
+            Log.i(ex.toString(), ex.getMessage());
+        }
+
+        String[]wordList = line.split(",");
+
+        for (int i = 0; i < wordList.length; i = i+2) {
+            words.put(wordList[i], wordList[i+1]);
+        }
+
+        return words;
     }
 }

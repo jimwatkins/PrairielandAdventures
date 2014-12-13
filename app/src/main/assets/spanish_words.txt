@@ -1,0 +1,4 @@
+hola, hello
+adios, goodbye
+uno, one
+
