@@ -33,23 +33,47 @@ public class FirstLevel extends ActionBarActivity {
 
         wordMap = getWords("spanish_verbs.csv");
 
-        String englishWord = getRandomEnglishWord();
-        String spanishWord = wordMap.get(englishWord);
+        String englishWord = "";
+        englishWord = getRandomEnglishWord();
+
+        String spanishWord = "";
+        spanishWord = wordMap.get(englishWord);
 
         Log.i(spanishWord, englishWord);
 
+        TextView englishTextView = (TextView) findViewById(R.id.txtEnglishAnswer);
+        englishTextView.setText(englishWord);
+
+        TextView correctView = getRandomSnakeTextView();
+        correctView.setText(spanishWord);
+
+ // assign wrong words
+        assignWrongWords(spanishWord,correctView);
+
+
+    }
+
+    private void assignWrongWords(String spanishWord, TextView correctView) {
         String wrongWord1 = new String();
         String wrongWord2 = new String();
 
-        int wrongNumber1 = 0;
-        wrongNumber1 = randInt(0, 29);
-
-        TextView snake1 = (TextView) findViewById(R.id.textView1);
-        snake1.setText(spanishWord);
-
-        TextView englishTextView = (TextView) findViewById(R.id.txtEnglishAnswer);
+        TextView textView;
 
 
+        textView = (TextView) findViewById(R.id.textView1);
+        if(textView != correctView) {
+            textView.setText(getRandomSpanishWord(spanishWord));
+        }
+
+        textView = (TextView) findViewById(R.id.textView2);
+        if(textView != correctView) {
+            textView.setText(getRandomSpanishWord(spanishWord));
+        }
+
+        textView = (TextView) findViewById(R.id.textView3);
+        if(textView != correctView) {
+            textView.setText(getRandomSpanishWord(spanishWord));
+        }
     }
 
     public String getRandomEnglishWord() {
