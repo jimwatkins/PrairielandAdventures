@@ -1,6 +1,7 @@
 package com.bigskyway.skyler.prairielandadventures;
 
 import android.content.res.AssetManager;
+import android.support.annotation.IdRes;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,10 +16,12 @@ import java.io.DataInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 
 public class FirstLevel extends ActionBarActivity {
     int health = 100;
+    Map<String,String> wordMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,18 +31,84 @@ public class FirstLevel extends ActionBarActivity {
         txtHealth.setText("Health: " + Integer.toString(health));
         findViewById(R.id.ivsnake3).setOnTouchListener(mSnakeTouch);
 
-        Map<String,String> test = getWords("spanish_words.txt");
-        Log.i("hola", test.get("hola"));
+        wordMap = getWords("spanish_verbs.csv");
+
+        String englishWord = getRandomEnglishWord();
+        String spanishWord = wordMap.get(englishWord);
+
+        Log.i(spanishWord, englishWord);
+
+        String wrongWord1 = new String();
+        String wrongWord2 = new String();
+
+        int wrongNumber1 = 0;
+        wrongNumber1 = randInt(0, 29);
+
+        TextView snake1 = (TextView) findViewById(R.id.textView1);
+        snake1.setText(spanishWord);
+
+        TextView englishTextView = (TextView) findViewById(R.id.txtEnglishAnswer);
+
 
     }
 
+    public String getRandomEnglishWord() {
+        int len = wordMap.values().size();
+        int i = randInt( 0, len - 1 );
+        String word = (String) wordMap.keySet().toArray()[i];
+        return word;
+    }
+
+    public String getRandomSpanishWord(String skipWord) {
+
+        int i = 0;
+        i = randInt( 0, wordMap.values().size() );
+
+        String word = new String();
+        word = (String) wordMap.values().toArray()[i];
+
+        while (word.equals(skipWord)) {
+            i = randInt( 0, wordMap.values().size() );
+            word = (String) wordMap.values().toArray()[i];
+        }
+
+        return word;
+    }
+
+    public TextView getRandomSnakeTextView() {
+        int r = randInt (1,3);
+        TextView txtView;
+
+        if (r == 1)
+            txtView = (TextView) findViewById(R.id.textView1);
+        else if (r==2)
+            txtView = (TextView) findViewById(R.id.textView2);
+        else
+            txtView = (TextView) findViewById(R.id.textView3);
+
+        return txtView;
+    }
+
+
+    public static int randInt(int min, int max) {
+
+        // NOTE: Usually this should be a field rather than a method
+        // variable so that it is not re-seeded every call.
+        Random rand = new Random();
+
+        // nextInt is normally exclusive of the top value,
+        // so add 1 to make it inclusive
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+
+        return randomNum;
+    }
 
     View.OnTouchListener mSnakeTouch = new View.OnTouchListener()  {
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             ImageView ivSnake = (ImageView) v;
-          ivSnake.setBackground(getResources().getDrawable(R.drawable.attackingsnakeposthree));
+          ivSnake.setBackground(getResources().getDrawable(R.drawable.attackingsnakeposthreetwo));
 //                toggleAlpha(v);
   //              shakeImage(v);
     //            changeImage (v);
@@ -99,9 +168,13 @@ public class FirstLevel extends ActionBarActivity {
         String[]wordList = line.split(",");
 
         for (int i = 0; i < wordList.length; i = i+2) {
-            words.put(wordList[i], wordList[i+1]);
+            words.put(wordList[i+1], wordList[i]);
         }
 
+
         return words;
+
+
+
     }
 }

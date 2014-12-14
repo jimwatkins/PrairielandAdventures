@@ -1,4 +1,2 @@
-hola, hello
-adios, goodbye
-uno, one
+hola, hello, adios, goodbye, uno, one
 
