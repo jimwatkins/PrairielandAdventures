@@ -4,6 +4,7 @@ import com.bigskyway.skyler.prairielandadventures.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 
 /**
@@ -38,6 +40,15 @@ public class MenuActivity extends Activity {
         Log.i("Launching Screen", "Shop");
         Intent intent = new Intent(this, Shop.class);
         startActivity(intent);
+    }
+
+    public void launchMultiplayer(View view) {
+        Toast toast = Toast.makeText(getApplicationContext(), "Functionality not available yet", Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    public void quitGame(View view) {
+        finish();
     }
 
 

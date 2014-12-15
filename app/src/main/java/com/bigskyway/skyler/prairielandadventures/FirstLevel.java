@@ -1,5 +1,6 @@
 package com.bigskyway.skyler.prairielandadventures;
 
+import android.app.AlertDialog;
 import android.content.res.AssetManager;
 import android.os.Handler;
 import android.support.annotation.IdRes;
@@ -38,12 +39,32 @@ public class FirstLevel extends ActionBarActivity {
 
         wordMap = getWords("spanish_verbs.csv");
 
-        initializeWords();
         startRound();
     }
 
     private void startRound() {
+        health = 100;
+        snakeHealth = 100;
         resetRound();
+    }
+
+    private void gameOver() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog dialog;
+        if (snakeHealth == 0) {
+
+            builder.setMessage("Oops, the snakes won")
+                    .setTitle("Defeat");
+            dialog = builder.create();
+            dialog.show();
+        }
+        else if (health == 0) {
+            builder.setMessage("Congratulations, you won")
+                    .setTitle("Victory");
+            dialog = builder.create();
+            dialog.show();
+        }
+        this.finish();
     }
 
     private void resetRound() {
@@ -51,7 +72,7 @@ public class FirstLevel extends ActionBarActivity {
         updateTimer();
         initializeWords();
 
-        // start new handler
+        // start time handler
         timeHandler = new Handler();
         timeHandler.postDelayed(timeCheck, 1000);
     }
@@ -73,7 +94,6 @@ public class FirstLevel extends ActionBarActivity {
 
         // assign wrong words
         assignWrongWords(spanishWord,correctView);
-
     }
 
 
@@ -109,8 +129,14 @@ public class FirstLevel extends ActionBarActivity {
         else {
             snakeHealth = snakeHealth - 10;
         }
-        updateHealth();
-        resetRound();
+
+        if (health == 0 || snakeHealth == 0) {
+            gameOver();
+        }
+        else {
+            updateHealth();
+            resetRound();
+        }
     }
 
     private void assignWrongWords(String spanishWord, TextView correctView) {
@@ -143,13 +169,13 @@ public class FirstLevel extends ActionBarActivity {
     public String getRandomSpanishWord(String skipWord) {
 
         int i = 0;
-        i = randInt( 0, wordMap.values().size() );
+        i = randInt( 0, wordMap.values().size() - 1 );
 
         String word = new String();
         word = (String) wordMap.values().toArray()[i];
 
         while (word.equals(skipWord)) {
-            i = randInt( 0, wordMap.values().size() );
+            i = randInt( 0, wordMap.values().size() - 1 );
             word = (String) wordMap.values().toArray()[i];
         }
 

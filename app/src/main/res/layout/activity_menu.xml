@@ -28,7 +28,8 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:id="@+id/Multiplayer"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="launchMultiplayer" />
 
         <ImageButton
             android:layout_width="60dp"
@@ -41,7 +42,8 @@
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:id="@+id/Quit"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="quitGame" />
 
     </LinearLayout>
 
