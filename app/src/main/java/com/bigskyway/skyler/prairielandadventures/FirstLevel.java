@@ -1,6 +1,7 @@
 package com.bigskyway.skyler.prairielandadventures;
 
 import android.content.res.AssetManager;
+import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -22,20 +23,40 @@ import java.util.Random;
 
 public class FirstLevel extends ActionBarActivity {
     int health = 100;
+    int snakeHealth = 100;
     Map<String,String> wordMap;
     int timer = 5;
+    Handler timeHandler;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_level);
-        TextView txtHealth = (TextView) findViewById(R.id.TxtHealth);
-        txtHealth.setText("Health: " + Integer.toString(health));
+        updateHealth();
         findViewById(R.id.ivsnake3).setOnTouchListener(mSnakeTouch);
 
         wordMap = getWords("spanish_verbs.csv");
 
+        initializeWords();
+        startRound();
+    }
+
+    private void startRound() {
+        resetRound();
+    }
+
+    private void resetRound() {
+        timer = 5;
+        updateTimer();
+        initializeWords();
+
+        // start new handler
+        timeHandler = new Handler();
+        timeHandler.postDelayed(timeCheck, 1000);
+    }
+
+    private void initializeWords() {
         String englishWord = "";
         englishWord = getRandomEnglishWord();
 
@@ -50,21 +71,48 @@ public class FirstLevel extends ActionBarActivity {
         TextView correctView = getRandomSnakeTextView();
         correctView.setText(spanishWord);
 
- // assign wrong words
+        // assign wrong words
         assignWrongWords(spanishWord,correctView);
 
-        startRound();
     }
 
-    private void startRound() {
-        updateTimer();
-    }
 
     private void updateTimer() {
         TextView txtTimer = (TextView) findViewById(R.id.txtTimer);
         txtTimer.setText("Time: " + Integer.toString(timer));
-
     }
+
+    private void updateHealth() {
+        TextView txtHealth = (TextView) findViewById(R.id.TxtHealth);
+        txtHealth.setText("Health: " + Integer.toString(health));
+    }
+
+    final Runnable timeCheck = new Runnable()
+    {
+        @Override
+        public void run() {
+            if (timer > 0) {
+                timer = timer - 1;
+                updateTimer();
+                timeHandler.postDelayed(timeCheck, 1000);
+            }
+            else if (timer == 0 ) {
+                roundOver(false);
+            }
+        }
+    };
+
+    private void roundOver(boolean didPlayerWin) {
+        if (didPlayerWin == false) {
+            health = health - 10;
+        }
+        else {
+            snakeHealth = snakeHealth - 10;
+        }
+        updateHealth();
+        resetRound();
+    }
+
     private void assignWrongWords(String spanishWord, TextView correctView) {
 
         TextView textView;
