@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.io.DataInputStream;
 import java.io.InputStream;
+import java.sql.Time;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -22,6 +23,8 @@ import java.util.Random;
 public class FirstLevel extends ActionBarActivity {
     int health = 100;
     Map<String,String> wordMap;
+    int timer = 5;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +53,21 @@ public class FirstLevel extends ActionBarActivity {
  // assign wrong words
         assignWrongWords(spanishWord,correctView);
 
-
+        startRound();
     }
 
+    private void startRound() {
+        updateTimer();
+    }
+
+    private void updateTimer() {
+        TextView txtTimer = (TextView) findViewById(R.id.txtTimer);
+        txtTimer.setText("Time: " + Integer.toString(timer));
+
+    }
     private void assignWrongWords(String spanishWord, TextView correctView) {
-        String wrongWord1 = new String();
-        String wrongWord2 = new String();
 
         TextView textView;
-
 
         textView = (TextView) findViewById(R.id.textView1);
         if(textView != correctView) {

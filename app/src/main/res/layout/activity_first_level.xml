@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Hello"
+        android:text="Text"
         android:id="@+id/txtEnglishAnswer"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Hola"
+        android:text="Text"
         android:id="@+id/textView2"
         android:layout_below="@+id/snakelayout"
         android:layout_centerHorizontal="true"
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Hasta Mañana"
+        android:text="Text"
         android:id="@+id/textView1"
         android:layout_below="@+id/snakelayout"
         android:textSize="20dp"
@@ -78,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Adiós"
+        android:text="Text"
         android:id="@+id/textView3"
         android:layout_below="@+id/snakelayout"
         android:layout_centerHorizontal="false"
@@ -110,6 +110,14 @@
             android:id="@+id/TxtHealth"
             android:layout_gravity="left|bottom"
             android:layout_marginTop="30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="5"
+            android:id="@+id/txtTimer"
+            android:layout_gravity="center" />
 
     </FrameLayout>
 </RelativeLayout>
