@@ -1,6 +1,7 @@
 package com.bigskyway.skyler.prairielandadventures;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.AssetManager;
 import android.os.Handler;
 import android.support.annotation.IdRes;
@@ -28,21 +29,28 @@ public class FirstLevel extends ActionBarActivity {
     Map<String,String> wordMap;
     int timer = 5;
     Handler timeHandler;
-
+    TextView correctView;
+    int roundLength = 8;
+    boolean matchOver = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_level);
         updateHealth();
-        findViewById(R.id.ivsnake3).setOnTouchListener(mSnakeTouch);
-
+        findViewById(R.id.ivsnake3).setOnClickListener(mSnakeClick);
+        findViewById(R.id.ivsnake2).setOnClickListener(mSnakeClick);
+        findViewById(R.id.ivsnake1).setOnClickListener(mSnakeClick);
         wordMap = getWords("spanish_verbs.csv");
 
-        startRound();
+        // start time handler
+        timeHandler = new Handler();
+        timeHandler.postDelayed(timeCheck, 1000);
+        startMatch();
     }
 
-    private void startRound() {
+    private void startMatch() {
+        matchOver = false;
         health = 100;
         snakeHealth = 100;
         resetRound();
@@ -50,38 +58,57 @@ public class FirstLevel extends ActionBarActivity {
 
     private void gameOver() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        AlertDialog dialog;
-        if (snakeHealth == 0) {
+        AlertDialog dialog = null;
+        if (health == 0) {
 
             builder.setMessage("Oops, the snakes won")
-                    .setTitle("Defeat");
+                    .setTitle("Defeat")
+                    .setPositiveButton("Ok", finishDialogueListener);
             dialog = builder.create();
             dialog.show();
         }
-        else if (health == 0) {
+        else if (snakeHealth == 0) {
             builder.setMessage("Congratulations, you won")
-                    .setTitle("Victory");
+                    .setTitle("Victory")
+                    .setPositiveButton("Ok", finishDialogueListener);
             dialog = builder.create();
             dialog.show();
         }
-        this.finish();
     }
 
+    protected DialogInterface.OnClickListener finishDialogueListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            finishMatch();
+        }
+    };
+
+    private void finishMatch() {
+        matchOver = true;
+        finish();
+    }
+
+
     private void resetRound() {
-        timer = 5;
+
+        timer = roundLength;
         updateTimer();
         initializeWords();
 
-        // start time handler
-        timeHandler = new Handler();
-        timeHandler.postDelayed(timeCheck, 1000);
+        ImageView ivSnake = (ImageView) findViewById(R.id.ivsnake1);
+        ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
+        ivSnake = (ImageView) findViewById(R.id.ivsnake2);
+        ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
+        ivSnake = (ImageView) findViewById(R.id.ivsnake3);
+        ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
+
     }
 
     private void initializeWords() {
         String englishWord = "";
         englishWord = getRandomEnglishWord();
 
-        String spanishWord = "";
+        String spanishWord;
         spanishWord = wordMap.get(englishWord);
 
         Log.i(spanishWord, englishWord);
@@ -89,11 +116,12 @@ public class FirstLevel extends ActionBarActivity {
         TextView englishTextView = (TextView) findViewById(R.id.txtEnglishAnswer);
         englishTextView.setText(englishWord);
 
-        TextView correctView = getRandomSnakeTextView();
+        correctView = getRandomSnakeTextView();
         correctView.setText(spanishWord);
 
         // assign wrong words
         assignWrongWords(spanishWord,correctView);
+
     }
 
 
@@ -105,12 +133,17 @@ public class FirstLevel extends ActionBarActivity {
     private void updateHealth() {
         TextView txtHealth = (TextView) findViewById(R.id.TxtHealth);
         txtHealth.setText("Health: " + Integer.toString(health));
+        TextView txtSnakeHealth = (TextView) findViewById(R.id.txtSnakeHealth);
+        txtSnakeHealth.setText("Health: " + Integer.toString(snakeHealth));
     }
 
     final Runnable timeCheck = new Runnable()
     {
         @Override
         public void run() {
+            // check if I should be running
+            if (matchOver) return;
+
             if (timer > 0) {
                 timer = timer - 1;
                 updateTimer();
@@ -118,6 +151,7 @@ public class FirstLevel extends ActionBarActivity {
             }
             else if (timer == 0 ) {
                 roundOver(false);
+                timeHandler.postDelayed(timeCheck, 1000);
             }
         }
     };
@@ -131,6 +165,7 @@ public class FirstLevel extends ActionBarActivity {
         }
 
         if (health == 0 || snakeHealth == 0) {
+            updateHealth();
             gameOver();
         }
         else {
@@ -210,15 +245,81 @@ public class FirstLevel extends ActionBarActivity {
         return randomNum;
     }
 
+
+    View.OnClickListener mSnakeClick = new View.OnClickListener()  {
+
+        @Override
+        public void onClick(View v) {
+            ImageView ivSnake = (ImageView) v;
+            ivSnake.setBackground(getResources().getDrawable(R.drawable.attackingsnakeposthreetwo));
+
+            // is the snake clicked the right snake ?
+            if (ivSnake.getId() == R.id.ivsnake1) {
+                if ( R.id.textView1 == correctView.getId() ) {
+                    roundOver(true);
+                }
+                else {
+                    roundOver(false);
+                }
+            }
+
+            if (ivSnake.getId() == R.id.ivsnake2) {
+                if ( R.id.textView2 == correctView.getId() ) {
+                    roundOver(true);
+                }
+                else {
+                    roundOver(false);
+                }
+            }
+
+            if (ivSnake.getId() == R.id.ivsnake3) {
+                if ( R.id.textView3 == correctView.getId() ) {
+                    roundOver(true);
+                }
+                else {
+                    roundOver(false);
+                }
+            }
+
+        }
+    };
+
+
+
     View.OnTouchListener mSnakeTouch = new View.OnTouchListener()  {
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             ImageView ivSnake = (ImageView) v;
-          ivSnake.setBackground(getResources().getDrawable(R.drawable.attackingsnakeposthreetwo));
-//                toggleAlpha(v);
-  //              shakeImage(v);
-    //            changeImage (v);
+            ivSnake.setBackground(getResources().getDrawable(R.drawable.attackingsnakeposthreetwo));
+
+            // is the snake clicked the right snake ?
+            if (ivSnake.getId() == R.id.ivsnake1) {
+                if ( R.id.textView1 == correctView.getId() ) {
+                    roundOver(true);
+                }
+                else {
+                    roundOver(false);
+                }
+            }
+
+            if (ivSnake.getId() == R.id.ivsnake2) {
+                if ( R.id.textView2 == correctView.getId() ) {
+                    roundOver(true);
+                }
+                else {
+                    roundOver(false);
+                }
+            }
+
+            if (ivSnake.getId() == R.id.ivsnake3) {
+                if ( R.id.textView3 == correctView.getId() ) {
+                    roundOver(true);
+                }
+                else {
+                    roundOver(false);
+                }
+            }
 
             return true;
         }
