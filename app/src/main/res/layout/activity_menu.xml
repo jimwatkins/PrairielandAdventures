@@ -1,7 +1,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:background="@drawable/gamemenu_bg"
-    tools:context="com.bigskyway.skyler.prairielandadventures.MenuActivity">
+    tools:context="com.bigskyway.skyler.prairielandadventures.MenuActivity"
+
+    >
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
@@ -62,6 +65,20 @@
             android:textSize="30dp"
             android:background="@android:color/transparent" />
 
+
+
+
     </LinearLayout>
+
+    <com.google.android.gms.ads.doubleclick.PublisherAdView
+        android:id="@+id/publisherAdView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
+        android:layout_gravity="bottom">
+    </com.google.android.gms.ads.doubleclick.PublisherAdView>
 
 </FrameLayout>
