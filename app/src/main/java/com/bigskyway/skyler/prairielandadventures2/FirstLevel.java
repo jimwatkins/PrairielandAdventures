@@ -7,10 +7,12 @@ import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,16 +33,20 @@ public class FirstLevel extends ActionBarActivity {
     TextView correctView;
     int roundLength = 8;
     boolean matchOver = true;
+    boolean bMoveBack = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_level);
         updateHealth();
-        findViewById(R.id.ivsnake3).setOnClickListener(mSnakeClick);
-        findViewById(R.id.ivsnake2).setOnClickListener(mSnakeClick);
-        findViewById(R.id.ivsnake1).setOnClickListener(mSnakeClick);
-        wordMap = getWords( ((MainScreenActivity) this.getParent()).sFileToRead);
+        findViewById(R.id.imgSnake3).setOnClickListener(mSnakeClick);
+        findViewById(R.id.imgSnake2).setOnClickListener(mSnakeClick);
+        findViewById(R.id.imgSnake1).setOnClickListener(mSnakeClick);
+        String sWords = this.getIntent().getStringExtra("fileToLoad");
+        wordMap = getWords( sWords );
+//        wordMap = getWords("spanish_verbs.csv");
+
 
         // start time handler
         timeHandler = new Handler();
@@ -94,11 +100,11 @@ public class FirstLevel extends ActionBarActivity {
         updateTimer();
         initializeWords();
 
-        ImageView ivSnake = (ImageView) findViewById(R.id.ivsnake1);
+        ImageView ivSnake = (ImageView) findViewById(R.id.imgSnake1);
         ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
-        ivSnake = (ImageView) findViewById(R.id.ivsnake2);
+        ivSnake = (ImageView) findViewById(R.id.imgSnake2);
         ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
-        ivSnake = (ImageView) findViewById(R.id.ivsnake3);
+        ivSnake = (ImageView) findViewById(R.id.imgSnake3);
         ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
 
     }
@@ -119,7 +125,7 @@ public class FirstLevel extends ActionBarActivity {
         correctView.setText(spanishWord);
 
         // assign wrong words
-        assignWrongWords(spanishWord,correctView);
+        assignWrongWords(spanishWord, correctView);
 
     }
 
@@ -141,12 +147,15 @@ public class FirstLevel extends ActionBarActivity {
         @Override
         public void run() {
             // check if I should be running
+
+            bMoveBack = ! bMoveBack;
+
             if (matchOver) return;
 
             if (timer > 0) {
                 timer = timer - 1;
                 updateTimer();
-                moveSnake()
+                moveSnakes();
                 timeHandler.postDelayed(timeCheck, 1000);
             }
             else if (timer == 0 ) {
@@ -178,17 +187,17 @@ public class FirstLevel extends ActionBarActivity {
 
         TextView textView;
 
-        textView = (TextView) findViewById(R.id.textView1);
+        textView = (TextView) findViewById(R.id.txtVSpan1);
         if(textView != correctView) {
             textView.setText(getRandomSpanishWord(spanishWord));
         }
 
-        textView = (TextView) findViewById(R.id.textView2);
+        textView = (TextView) findViewById(R.id.txtVSpan2);
         if(textView != correctView) {
             textView.setText(getRandomSpanishWord(spanishWord));
         }
 
-        textView = (TextView) findViewById(R.id.textView3);
+        textView = (TextView) findViewById(R.id.txtVSpan3);
         if(textView != correctView) {
             textView.setText(getRandomSpanishWord(spanishWord));
         }
@@ -222,28 +231,97 @@ public class FirstLevel extends ActionBarActivity {
         TextView txtView;
 
         if (r == 1)
-            txtView = (TextView) findViewById(R.id.textView1);
+            txtView = (TextView) findViewById(R.id.txtVSpan1);
         else if (r==2)
-            txtView = (TextView) findViewById(R.id.textView2);
+            txtView = (TextView) findViewById(R.id.txtVSpan2);
         else
-            txtView = (TextView) findViewById(R.id.textView3);
+            txtView = (TextView) findViewById(R.id.txtVSpan3);
 
         return txtView;
     }
 
-    public void moveSnake() {
+    public void moveSnakes() {
         int r = randInt (1,3);
+        int iOffset = 300;
         TextView txtView;
+        ImageView ivSnake;
+        FrameLayout.LayoutParams fParams;
+        FrameLayout.LayoutParams fTxtParams;
 
-        if (r == 1)
-            txtView = (TextView) findViewById(R.id.textView1);
-        else if (r==2)
-            txtView = (TextView) findViewById(R.id.textView2);
-        else
-            txtView = (TextView) findViewById(R.id.textView3);
+//        if (r == 1)
+//            txtView = (TextView) findViewById(R.id.txtVSpan1);
+//        else if (r==2)
+//            txtView = (TextView) findViewById(R.id.txtVSpan2);
+//        else
+//            txtView = (TextView) findViewById(R.id.txtVSpan3);
+//
+//        if (bMoveBack) {
+//            txtView.setLeft(txtView.getLeft() - iOffset);
+//            txtView.setTop(txtView.getTop() - iOffset);
+//        }
+//        else {
+//            txtView.setLeft(txtView.getLeft() + iOffset);
+//            txtView.setTop(txtView.getTop() - iOffset);
+//        }
+        //set location for first snake
+        txtView = (TextView) findViewById(R.id.txtVSpan1);
+        ivSnake = (ImageView) findViewById(R.id.imgSnake1);
+        ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
+        fParams = (FrameLayout.LayoutParams) ivSnake.getLayoutParams();
+        fTxtParams = (FrameLayout.LayoutParams) txtView.getLayoutParams();
+        r = randInt(1,3);
+        if (r==1){
+            fParams.gravity = Gravity.TOP | Gravity.LEFT;
+            fTxtParams.gravity = Gravity.TOP | Gravity.LEFT;
+            }
+        else if (r==2){
+            fParams.gravity = Gravity.CENTER_VERTICAL | Gravity.LEFT;
+            fTxtParams.gravity = Gravity.CENTER_VERTICAL | Gravity.LEFT;
+            }
+        else {
+            fParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+            fTxtParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+        }
 
-        txtView.setPaddingRelative(5,5,0,0);
+        //set location for second snake
+        txtView = (TextView) findViewById(R.id.txtVSpan2);
+        ivSnake = (ImageView) findViewById(R.id.imgSnake2);
+        ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
+        fParams = (FrameLayout.LayoutParams) ivSnake.getLayoutParams();
+        fTxtParams = (FrameLayout.LayoutParams) txtView.getLayoutParams();
+        r = randInt(1,2);
+        if (r==1){
+            fParams.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+            fTxtParams.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+        }
+        else if (r==2){
+            fParams.gravity = Gravity.CENTER;
+            fTxtParams.gravity = Gravity.CENTER;}
+
+        //set location for third snake
+        txtView = (TextView) findViewById(R.id.txtVSpan2);
+        ivSnake = (ImageView) findViewById(R.id.imgSnake3);
+        ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
+        fParams = (FrameLayout.LayoutParams) ivSnake.getLayoutParams();
+        fTxtParams = (FrameLayout.LayoutParams) txtView.getLayoutParams();
+        r = randInt(1,3);
+        if (r==1){
+            fParams.gravity = Gravity.RIGHT | Gravity.TOP;
+            fTxtParams.gravity = Gravity.RIGHT | Gravity.TOP;
+        }
+        else if (r==2){
+            fParams.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
+            fTxtParams.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
+        }
+        else {
+            fParams.gravity = Gravity.RIGHT | Gravity.BOTTOM;
+            fTxtParams.gravity = Gravity.RIGHT | Gravity.BOTTOM;
+
+        }
+
     }
+
+
 
     public static int randInt(int min, int max) {
 
@@ -267,8 +345,8 @@ public class FirstLevel extends ActionBarActivity {
             ivSnake.setBackground(getResources().getDrawable(R.drawable.attackingsnakeposthreetwo));
 
             // is the snake clicked the right snake ?
-            if (ivSnake.getId() == R.id.ivsnake1) {
-                if ( R.id.textView1 == correctView.getId() ) {
+            if (ivSnake.getId() == R.id.imgSnake1) {
+                if ( R.id.txtVSpan1 == correctView.getId() ) {
                     roundOver(true);
                 }
                 else {
@@ -276,8 +354,8 @@ public class FirstLevel extends ActionBarActivity {
                 }
             }
 
-            if (ivSnake.getId() == R.id.ivsnake2) {
-                if ( R.id.textView2 == correctView.getId() ) {
+            if (ivSnake.getId() == R.id.imgSnake2) {
+                if ( R.id.txtVSpan2 == correctView.getId() ) {
                     roundOver(true);
                 }
                 else {
@@ -285,8 +363,8 @@ public class FirstLevel extends ActionBarActivity {
                 }
             }
 
-            if (ivSnake.getId() == R.id.ivsnake3) {
-                if ( R.id.textView3 == correctView.getId() ) {
+            if (ivSnake.getId() == R.id.imgSnake3) {
+                if ( R.id.txtVSpan3 == correctView.getId() ) {
                     roundOver(true);
                 }
                 else {
@@ -307,8 +385,8 @@ public class FirstLevel extends ActionBarActivity {
             ivSnake.setBackground(getResources().getDrawable(R.drawable.attackingsnakeposthreetwo));
 
             // is the snake clicked the right snake ?
-            if (ivSnake.getId() == R.id.ivsnake1) {
-                if ( R.id.textView1 == correctView.getId() ) {
+            if (ivSnake.getId() == R.id.imgSnake1) {
+                if ( R.id.txtVSpan1 == correctView.getId() ) {
                     roundOver(true);
                 }
                 else {
@@ -316,8 +394,8 @@ public class FirstLevel extends ActionBarActivity {
                 }
             }
 
-            if (ivSnake.getId() == R.id.ivsnake2) {
-                if ( R.id.textView2 == correctView.getId() ) {
+            if (ivSnake.getId() == R.id.imgSnake2) {
+                if ( R.id.txtVSpan2 == correctView.getId() ) {
                     roundOver(true);
                 }
                 else {
@@ -325,8 +403,8 @@ public class FirstLevel extends ActionBarActivity {
                 }
             }
 
-            if (ivSnake.getId() == R.id.ivsnake3) {
-                if ( R.id.textView3 == correctView.getId() ) {
+            if (ivSnake.getId() == R.id.imgSnake3) {
+                if ( R.id.txtVSpan3 == correctView.getId() ) {
                     roundOver(true);
                 }
                 else {
