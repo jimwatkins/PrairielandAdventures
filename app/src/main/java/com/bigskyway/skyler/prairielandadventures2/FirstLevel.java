@@ -248,21 +248,7 @@ public class FirstLevel extends ActionBarActivity {
         FrameLayout.LayoutParams fParams;
         FrameLayout.LayoutParams fTxtParams;
 
-//        if (r == 1)
-//            txtView = (TextView) findViewById(R.id.txtVSpan1);
-//        else if (r==2)
-//            txtView = (TextView) findViewById(R.id.txtVSpan2);
-//        else
-//            txtView = (TextView) findViewById(R.id.txtVSpan3);
 //
-//        if (bMoveBack) {
-//            txtView.setLeft(txtView.getLeft() - iOffset);
-//            txtView.setTop(txtView.getTop() - iOffset);
-//        }
-//        else {
-//            txtView.setLeft(txtView.getLeft() + iOffset);
-//            txtView.setTop(txtView.getTop() - iOffset);
-//        }
         //set location for first snake
         txtView = (TextView) findViewById(R.id.txtVSpan1);
         ivSnake = (ImageView) findViewById(R.id.imgSnake1);
@@ -299,7 +285,7 @@ public class FirstLevel extends ActionBarActivity {
             fTxtParams.gravity = Gravity.CENTER;}
 
         //set location for third snake
-        txtView = (TextView) findViewById(R.id.txtVSpan2);
+        txtView = (TextView) findViewById(R.id.txtVSpan3);
         ivSnake = (ImageView) findViewById(R.id.imgSnake3);
         ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
         fParams = (FrameLayout.LayoutParams) ivSnake.getLayoutParams();
