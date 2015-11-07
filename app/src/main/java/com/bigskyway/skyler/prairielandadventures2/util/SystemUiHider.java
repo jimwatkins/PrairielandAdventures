@@ -1,4 +1,4 @@
-package com.bigskyway.skyler.prairielandadventures.util;
+package com.bigskyway.skyler.prairielandadventures2.util;
 
 import android.app.Activity;
 import android.os.Build;

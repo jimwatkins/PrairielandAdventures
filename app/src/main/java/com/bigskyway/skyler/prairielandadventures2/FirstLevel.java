@@ -1,10 +1,9 @@
-package com.bigskyway.skyler.prairielandadventures;
+package com.bigskyway.skyler.prairielandadventures2;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.AssetManager;
 import android.os.Handler;
-import android.support.annotation.IdRes;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,9 +14,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.DataInputStream;
+import com.bigskyway.skyler.prairielandadventures.R;
+
 import java.io.InputStream;
-import java.sql.Time;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;

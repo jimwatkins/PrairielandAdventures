@@ -4,7 +4,7 @@ android {
     compileSdkVersion 21
     buildToolsVersion "21.0.2"
     defaultConfig {
-        applicationId "com.bigskyway.skyler.prairielandadventures"
+        applicationId "com.bigskyway.skyler.prairielandadventures2"
         minSdkVersion 16
         targetSdkVersion 21
         versionCode 2

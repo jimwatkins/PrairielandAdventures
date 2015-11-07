@@ -1,9 +1,11 @@
-package com.bigskyway.skyler.prairielandadventures;
+package com.bigskyway.skyler.prairielandadventures2;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.bigskyway.skyler.prairielandadventures.R;
 
 
 public class Unlock extends ActionBarActivity {

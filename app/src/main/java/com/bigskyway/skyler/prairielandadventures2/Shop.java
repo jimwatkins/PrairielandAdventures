@@ -1,4 +1,4 @@
-package com.bigskyway.skyler.prairielandadventures;
+package com.bigskyway.skyler.prairielandadventures2;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.bigskyway.skyler.prairielandadventures.R;
 
 
 public class Shop extends ActionBarActivity {

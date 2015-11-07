@@ -1,6 +1,4 @@
-package com.bigskyway.skyler.prairielandadventures.util;
-
-import android.content.res.AssetManager;
+package com.bigskyway.skyler.prairielandadventures2.util;
 
 import java.util.HashMap;
 import java.util.Map;

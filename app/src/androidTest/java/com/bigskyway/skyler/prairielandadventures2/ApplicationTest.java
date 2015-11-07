@@ -1,4 +1,4 @@
-package com.bigskyway.skyler.prairielandadventures;
+package com.bigskyway.skyler.prairielandadventures2;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

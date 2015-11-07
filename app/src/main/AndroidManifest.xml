@@ -8,13 +8,13 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainScreenActivity"
+            android:name="com.bigskyway.skyler.prairielandadventures2.MainScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
-            android:name=".MenuActivity"
+            android:name="com.bigskyway.skyler.prairielandadventures2.MenuActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_menu"
             android:theme="@style/FullscreenTheme" >
@@ -25,24 +25,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FirstLevel"
+            android:name="com.bigskyway.skyler.prairielandadventures2.FirstLevel"
             android:label="@string/title_activity_first_level"
-            android:parentActivityName=".MainScreenActivity" >
+            android:parentActivityName="com.bigskyway.skyler.prairielandadventures2.MainScreenActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.bigskyway.skyler.prairielandadventures.MainScreenActivity" />
+                android:value="com.bigskyway.skyler.prairielandadventures2.MainScreenActivity" />
         </activity>
         <activity
-            android:name=".Shop"
+            android:name="com.bigskyway.skyler.prairielandadventures2.Shop"
             android:label="@string/title_activity_shop" >
         </activity>
         <activity
-            android:name=".Unlock"
+            android:name="com.bigskyway.skyler.prairielandadventures2.Unlock"
             android:label="@string/title_activity_unlock"
-            android:parentActivityName=".Shop" >
+            android:parentActivityName="com.bigskyway.skyler.prairielandadventures2.Shop" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.bigskyway.skyler.prairielandadventures.Shop" />
+                android:value="com.bigskyway.skyler.prairielandadventures2.Shop" />
         </activity>
     </application>
 

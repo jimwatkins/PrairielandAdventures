@@ -1,15 +1,11 @@
-package com.bigskyway.skyler.prairielandadventures;
+package com.bigskyway.skyler.prairielandadventures2;
 
-import com.bigskyway.skyler.prairielandadventures.util.SystemUiHider;
+import com.bigskyway.skyler.prairielandadventures.R;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 
 
