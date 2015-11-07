@@ -40,7 +40,7 @@ public class FirstLevel extends ActionBarActivity {
         findViewById(R.id.ivsnake3).setOnClickListener(mSnakeClick);
         findViewById(R.id.ivsnake2).setOnClickListener(mSnakeClick);
         findViewById(R.id.ivsnake1).setOnClickListener(mSnakeClick);
-        wordMap = getWords("spanish_verbs.csv");
+        wordMap = getWords( ((MainScreenActivity) this.getParent()).sFileToRead);
 
         // start time handler
         timeHandler = new Handler();
@@ -67,7 +67,7 @@ public class FirstLevel extends ActionBarActivity {
             dialog.show();
         }
         else if (snakeHealth == 0) {
-            builder.setMessage("Congratulations, you won")
+            builder.setMessage("Congratulations, you won!")
                     .setTitle("Victory")
                     .setPositiveButton("Ok", finishDialogueListener);
             dialog = builder.create();
@@ -146,6 +146,7 @@ public class FirstLevel extends ActionBarActivity {
             if (timer > 0) {
                 timer = timer - 1;
                 updateTimer();
+                moveSnake()
                 timeHandler.postDelayed(timeCheck, 1000);
             }
             else if (timer == 0 ) {
@@ -230,6 +231,19 @@ public class FirstLevel extends ActionBarActivity {
         return txtView;
     }
 
+    public void moveSnake() {
+        int r = randInt (1,3);
+        TextView txtView;
+
+        if (r == 1)
+            txtView = (TextView) findViewById(R.id.textView1);
+        else if (r==2)
+            txtView = (TextView) findViewById(R.id.textView2);
+        else
+            txtView = (TextView) findViewById(R.id.textView3);
+
+        txtView.setPaddingRelative(5,5,0,0);
+    }
 
     public static int randInt(int min, int max) {
 
