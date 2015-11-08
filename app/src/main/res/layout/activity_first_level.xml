@@ -24,76 +24,6 @@
         android:id="@+id/txtSnakeHealth"
         android:layout_alignParentRight="true" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="175dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtEnglishAnswer"
-        android:weightSum="1"
-        android:id="@+id/snakelayout"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="175dp"
-            android:id="@+id/ivsnake1"
-            android:layout_weight=".33"
-            android:background="@drawable/startersnaketwo" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="175dp"
-            android:id="@+id/ivsnake2"
-            android:layout_weight=".33"
-            android:background="@drawable/startersnaketwo"
-            android:focusableInTouchMode="false" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="175dp"
-            android:layout_weight=".33"
-            android:background="@drawable/startersnaketwo"
-            android:id="@+id/ivsnake3" />
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Text"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/snakelayout"
-        android:layout_centerHorizontal="true"
-        android:textStyle="bold"
-        android:textSize="20dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Text"
-        android:id="@+id/textView1"
-        android:layout_below="@+id/snakelayout"
-        android:textSize="20dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Text"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/snakelayout"
-        android:layout_centerHorizontal="false"
-        android:gravity="right"
-        android:layout_alignRight="@+id/snakelayout"
-        android:textStyle="bold"
-        android:textSize="20dp" />
-
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -103,8 +33,8 @@
         android:id="@+id/FrameLayout">
 
         <ImageView
-            android:layout_width="190dp"
-            android:layout_height="190dp"
+            android:layout_width="124dp"
+            android:layout_height="124dp"
             android:id="@+id/Gary"
             android:layout_gravity="center_horizontal|bottom"
             android:background="@drawable/ggggbehindview" />
@@ -126,5 +56,70 @@
             android:id="@+id/txtTimer"
             android:layout_gravity="center" />
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="130dp"
+            android:id="@+id/imgSnake3"
+            android:layout_weight=".33"
+            android:background="@drawable/startersnaketwo"
+            android:focusableInTouchMode="false"
+            android:layout_gravity="right|center_vertical" />
+
+        <TextView
+            android:layout_width="85dp"
+            android:layout_height="162dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Text"
+            android:id="@+id/txtVSpan2"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_below="@+id/txtEnglishAnswer"
+            android:layout_gravity="center_horizontal|top" />
+
+        <TextView
+            android:layout_width="102dp"
+            android:layout_height="40dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Text"
+            android:id="@+id/txtVSpan1"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/txtEnglishAnswer"
+            android:layout_alignRight="@+id/txtEnglishAnswer"
+            android:layout_alignEnd="@+id/txtEnglishAnswer"
+            android:layout_alignBottom="@+id/textView3"
+            android:layout_gravity="left|center_vertical" />
+
+        <ImageButton
+            android:layout_width="74dp"
+            android:layout_height="119dp"
+            android:id="@+id/imgSnake2"
+            android:layout_weight=".33"
+            android:background="@drawable/startersnaketwo"
+            android:layout_gravity="center_horizontal|top" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="111dp"
+            android:layout_weight=".33"
+            android:background="@drawable/startersnaketwo"
+            android:id="@+id/imgSnake1"
+            android:layout_gravity="left|center_vertical" />
+
+        <TextView
+            android:layout_width="103dp"
+            android:layout_height="111dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Text"
+            android:id="@+id/txtVSpan3"
+            android:layout_centerHorizontal="false"
+            android:gravity="right"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_below="@+id/txtEnglishAnswer"
+            android:layout_gravity="right|center_vertical" />
+
     </FrameLayout>
+
 </RelativeLayout>

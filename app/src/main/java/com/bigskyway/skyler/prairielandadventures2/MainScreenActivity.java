@@ -11,10 +11,6 @@ import android.view.View;
 
 public class MainScreenActivity extends Activity {
 
-    public String sFileToRead;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,19 +19,18 @@ public class MainScreenActivity extends Activity {
 
     }
 
-
-
-public void launchFirstLevel (View view) {
-    Log.i("Launching Screen", "Level One");
-    sFileToRead = "spanish_verbs.csv";
-    Intent intent = new Intent(this, FirstLevel.class);
-    startActivity(intent);
-}
-
-    public void launchFirstLevel_Nouns (View view) {
-        Log.i("Launching Screen", "Level One, Step 2");
-        sFileToRead = "SpanishVocab_AllNouns.csv";
+    public void launchFirstLevelNouns (View view) {
+        Log.i("Launching Screen", "Level One Step 2");
         Intent intent = new Intent(this, FirstLevel.class);
+        intent.putExtra("fileToLoad", "SpanishVocab_AllNouns.csv");
+        startActivity(intent);
+    }
+
+
+    public void launchFirstLevel (View view) {
+        Log.i("Launching Screen", "Level One");
+        Intent intent = new Intent(this, FirstLevel.class);
+        intent.putExtra("fileToLoad", "spanish_verbs.csv");
         startActivity(intent);
     }
 
