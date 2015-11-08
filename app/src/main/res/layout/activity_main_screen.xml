@@ -28,13 +28,120 @@
             android:onClick="launchFirstLevel"
             android:alpha="0" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Step 2:  Nouns"
-            android:id="@+id/btnAllNouns"
-            android:onClick="launchFirstLevelNouns"
-            android:layout_gravity="right|bottom" />
+        <FrameLayout
+            android:layout_width="145dp"
+            android:layout_height="187dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:id="@+id/flayIslands1and2">
+
+            <ImageButton
+                android:layout_width="80dp"
+                android:layout_height="63dp"
+                android:id="@+id/ibNounsCat1"
+                android:layout_gravity="left|bottom"
+                android:onClick="launchFirstLevelNounsCat1"
+                android:src="@drawable/island1" />
+
+            <ImageButton
+                android:layout_width="91dp"
+                android:layout_height="70dp"
+                android:id="@+id/ibNounsCat2"
+                android:layout_gravity="top|left|center_vertical"
+                android:src="@drawable/island2"
+                android:onClick="launchFirstLevelNounsCat2" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="121dp"
+            android:layout_height="175dp"
+            android:layout_gravity="right|bottom"
+            android:id="@+id/flayIslands3and4">
+
+            <ImageButton
+                android:layout_width="99dp"
+                android:layout_height="60dp"
+                android:id="@+id/ibNounsCat3"
+                android:layout_gravity="top|center_vertical|right"
+                android:src="@drawable/island3"
+                android:onClick="launchFirstLevelNounsCat3" />
+
+            <ImageButton
+                android:layout_width="106dp"
+                android:layout_height="84dp"
+                android:id="@+id/ibNounsCat4"
+                android:layout_gravity="bottom|center|right"
+                android:src="@drawable/island4"
+                android:onClick="launchFirstLevelNounsCat4" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="86dp"
+            android:layout_height="123dp"
+            android:layout_gravity="right|center_vertical"
+            android:id="@+id/flayIslands5and6">
+
+            <ImageButton
+                android:layout_width="77dp"
+                android:layout_height="60dp"
+                android:id="@+id/ibNounsCat5"
+                android:layout_gravity="top|left|center_vertical"
+                android:src="@drawable/island5"
+                android:onClick="launchFirstLevelNounsCat5" />
+
+            <ImageButton
+                android:layout_width="68dp"
+                android:layout_height="51dp"
+                android:id="@+id/ibNounsCat6"
+                android:layout_gravity="left|center_vertical|bottom"
+                android:src="@drawable/island6"
+                android:onClick="launchFirstLevelNounsCat6" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="107dp"
+            android:layout_height="132dp"
+            android:layout_gravity="center"
+            android:id="@+id/flayIslands7and8">
+
+            <ImageButton
+                android:layout_width="89dp"
+                android:layout_height="63dp"
+                android:id="@+id/ibNounsCat7"
+                android:layout_gravity="top|left"
+                android:src="@drawable/island7"
+                android:onClick="launchFirstLevelNounsCat5" />
+
+            <ImageButton
+                android:layout_width="103dp"
+                android:layout_height="81dp"
+                android:id="@+id/ibAdverbs"
+                android:layout_gravity="bottom|right"
+                android:src="@drawable/island8"
+                android:onClick="launchFirstLevelAdv" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="114dp"
+            android:layout_height="143dp"
+            android:layout_gravity="left|center_vertical"
+            android:id="@+id/flayIslands9and10">
+
+            <ImageButton
+                android:layout_width="81dp"
+                android:layout_height="64dp"
+                android:id="@+id/ibNumbers"
+                android:layout_gravity="top|left"
+                android:src="@drawable/island9"
+                android:onClick="launchFirstLevelNumbers" />
+
+            <ImageButton
+                android:layout_width="52dp"
+                android:layout_height="40dp"
+                android:id="@+id/ibAdjectives"
+                android:layout_gravity="bottom|right"
+                android:src="@drawable/island10"
+                android:onClick="launchFirstLevelAdj" />
+        </FrameLayout>
 
     </FrameLayout>
 

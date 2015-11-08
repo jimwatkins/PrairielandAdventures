@@ -243,65 +243,73 @@ public class FirstLevel extends ActionBarActivity {
     public void moveSnakes() {
         int r = randInt (1,3);
         int iOffset = 300;
-        TextView txtView;
+        //TextView txtView;
         ImageView ivSnake;
+        FrameLayout flSnakeWord;
         FrameLayout.LayoutParams fParams;
-        FrameLayout.LayoutParams fTxtParams;
+        //FrameLayout.LayoutParams fTxtParams;
 
 //
-        //set location for first snake
-        txtView = (TextView) findViewById(R.id.txtVSpan1);
+        //set location for first snake/word pair
+        flSnakeWord = (FrameLayout) findViewById(R.id.flaySnakeWord1);
+        //txtView = (TextView) findViewById(R.id.txtVSpan1);
         ivSnake = (ImageView) findViewById(R.id.imgSnake1);
         ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
-        fParams = (FrameLayout.LayoutParams) ivSnake.getLayoutParams();
-        fTxtParams = (FrameLayout.LayoutParams) txtView.getLayoutParams();
+        fParams = (FrameLayout.LayoutParams) flSnakeWord.getLayoutParams();
+        //fParams = (FrameLayout.LayoutParams) ivSnake.getLayoutParams();
+        //fTxtParams = (FrameLayout.LayoutParams) txtView.getLayoutParams();
         r = randInt(1,3);
         if (r==1){
             fParams.gravity = Gravity.TOP | Gravity.LEFT;
-            fTxtParams.gravity = Gravity.TOP | Gravity.LEFT;
+            //fTxtParams.gravity = Gravity.TOP | Gravity.LEFT;
             }
         else if (r==2){
             fParams.gravity = Gravity.CENTER_VERTICAL | Gravity.LEFT;
-            fTxtParams.gravity = Gravity.CENTER_VERTICAL | Gravity.LEFT;
+            //fTxtParams.gravity = Gravity.CENTER_VERTICAL | Gravity.LEFT;
             }
         else {
             fParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
-            fTxtParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+            //fTxtParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
         }
 
-        //set location for second snake
-        txtView = (TextView) findViewById(R.id.txtVSpan2);
+        //set location for second snake/word pair
+        flSnakeWord = (FrameLayout) findViewById(R.id.flaySnakeWord2);
+        //txtView = (TextView) findViewById(R.id.txtVSpan1);
         ivSnake = (ImageView) findViewById(R.id.imgSnake2);
         ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
-        fParams = (FrameLayout.LayoutParams) ivSnake.getLayoutParams();
-        fTxtParams = (FrameLayout.LayoutParams) txtView.getLayoutParams();
+        fParams = (FrameLayout.LayoutParams) flSnakeWord.getLayoutParams();
+        //fParams = (FrameLayout.LayoutParams) ivSnake.getLayoutParams();
+        //fTxtParams = (FrameLayout.LayoutParams) txtView.getLayoutParams();
         r = randInt(1,2);
         if (r==1){
             fParams.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
-            fTxtParams.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+            //fTxtParams.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
         }
         else if (r==2){
             fParams.gravity = Gravity.CENTER;
-            fTxtParams.gravity = Gravity.CENTER;}
+            //fTxtParams.gravity = Gravity.CENTER;
+            }
 
-        //set location for third snake
-        txtView = (TextView) findViewById(R.id.txtVSpan3);
+        //set location for third snake/word pair
+        flSnakeWord = (FrameLayout) findViewById(R.id.flaySnakeWord3);
+        //txtView = (TextView) findViewById(R.id.txtVSpan1);
         ivSnake = (ImageView) findViewById(R.id.imgSnake3);
         ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
-        fParams = (FrameLayout.LayoutParams) ivSnake.getLayoutParams();
-        fTxtParams = (FrameLayout.LayoutParams) txtView.getLayoutParams();
+        fParams = (FrameLayout.LayoutParams) flSnakeWord.getLayoutParams();
+        //fParams = (FrameLayout.LayoutParams) ivSnake.getLayoutParams();
+        //fTxtParams = (FrameLayout.LayoutParams) txtView.getLayoutParams();
         r = randInt(1,3);
         if (r==1){
             fParams.gravity = Gravity.RIGHT | Gravity.TOP;
-            fTxtParams.gravity = Gravity.RIGHT | Gravity.TOP;
+            //fTxtParams.gravity = Gravity.RIGHT | Gravity.TOP;
         }
         else if (r==2){
             fParams.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
-            fTxtParams.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
+            //fTxtParams.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
         }
         else {
             fParams.gravity = Gravity.RIGHT | Gravity.BOTTOM;
-            fTxtParams.gravity = Gravity.RIGHT | Gravity.BOTTOM;
+            //fTxtParams.gravity = Gravity.RIGHT | Gravity.BOTTOM;
 
         }
 
