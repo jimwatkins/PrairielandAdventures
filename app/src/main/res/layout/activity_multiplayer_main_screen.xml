@@ -88,5 +88,13 @@
             android:id="@+id/tvViewLeaderboard"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.11" />
+
+        <fragment android:name="com.bigskyway.skyler.prairielandadventures2.EnableGooglePlayFragment"
+            android:id="@+id/viewer"
+            android:layout_weight="0.08"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_enable_google_play" />
+
     </LinearLayout>
 </RelativeLayout>
