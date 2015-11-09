@@ -38,6 +38,14 @@
                 android:value="com.bigskyway.skyler.prairielandadventures2.MainScreenActivity" />
         </activity>
         <activity
+            android:name="com.bigskyway.skyler.prairielandadventures2.ChallengeFirst"
+            android:label="@string/title_activity_first_level"
+            android:parentActivityName="com.bigskyway.skyler.prairielandadventures2.MultiplayerMenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.bigskyway.skyler.prairielandadventures2.MultiplayerMenuActivity" />
+        </activity>
+        <activity
             android:name="com.bigskyway.skyler.prairielandadventures2.Shop"
             android:label="@string/title_activity_shop" >
         </activity>

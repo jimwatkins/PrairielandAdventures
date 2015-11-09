@@ -19,13 +19,14 @@ public class MultiplayerMenuActivity extends Activity {
 
     }
 
-//    public void launchUnit21FirstChallenge (View view) {
-//        Log.i("Launching Screen", "Challenge One: Vocabulary");
-//        Intent intent = new Intent(this, FirstLevel.class);
-//        intent.putExtra("fileToLoad", "SpanishVocab_unit2_1.csv");
-//        startActivity(intent);
-//    }
-//
+    public void launchUnit21FirstChallenge (View view) {
+        Log.i("Launching Screen", "Challenge One: Vocabulary");
+        Intent intent = new Intent(this, ChallengeFirst.class);
+        intent.putExtra("fileToLoad", "SpanishVocab_Unit2_1.csv");
+        startActivity(intent);
+    }
+
+
 //    public void launchUnit21SecondChallenge (View view) {
 //        Log.i("Launching Screen", "Challenge Two: Demonstrative Adjectives and Pronouns");
 //        Intent intent = new Intent(this, FirstLevel.class);

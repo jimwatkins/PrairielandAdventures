@@ -33,13 +33,6 @@
         android:layout_alignParentEnd="true"
         android:id="@+id/FrameLayout">
 
-        <ImageView
-            android:layout_width="124dp"
-            android:layout_height="124dp"
-            android:id="@+id/ivHero"
-            android:layout_gravity="center_horizontal|bottom"
-            android:background="@drawable/ggggbehindview" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,15 +42,6 @@
             android:layout_gravity="left|bottom"
             android:layout_marginTop="30dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="5"
-            android:id="@+id/txtTimer"
-            android:layout_gravity="center"
-            android:textColor="#010101" />
-
         <FrameLayout
             android:layout_width="118dp"
             android:layout_height="138dp"
@@ -65,8 +49,8 @@
             android:id="@+id/flaySnakeWord1">
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="111dp"
+                android:layout_width="87dp"
+                android:layout_height="97dp"
                 android:layout_weight=".33"
                 android:background="@drawable/startersnaketwo"
                 android:id="@+id/imgSnake1"
@@ -96,8 +80,8 @@
             android:id="@+id/flaySnakeWord2">
 
             <ImageButton
-                android:layout_width="76dp"
-                android:layout_height="123dp"
+                android:layout_width="65dp"
+                android:layout_height="105dp"
                 android:id="@+id/imgSnake2"
                 android:layout_weight=".33"
                 android:background="@drawable/startersnaketwo"
@@ -125,8 +109,8 @@
             android:id="@+id/flaySnakeWord3">
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="123dp"
+                android:layout_width="87dp"
+                android:layout_height="107dp"
                 android:id="@+id/imgSnake3"
                 android:layout_weight=".33"
                 android:background="@drawable/startersnaketwo"
@@ -145,6 +129,29 @@
                 android:layout_below="@+id/txtEnglishAnswer"
                 android:layout_gravity="bottom|center_horizontal"
                 android:gravity="bottom|center_horizontal"
+                android:textColor="#010101" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="158dp"
+            android:layout_height="137dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:id="@+id/flayHeroTimer">
+
+            <ImageView
+                android:layout_width="107dp"
+                android:layout_height="107dp"
+                android:id="@+id/ivHero"
+                android:layout_gravity="center_horizontal|bottom"
+                android:background="@drawable/ggggbehindview" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="5"
+                android:id="@+id/txtTimer"
+                android:layout_gravity="top|center"
                 android:textColor="#010101" />
         </FrameLayout>
 
