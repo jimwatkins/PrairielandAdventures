@@ -16,8 +16,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bigskyway.skyler.prairielandadventures.R;
-
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;

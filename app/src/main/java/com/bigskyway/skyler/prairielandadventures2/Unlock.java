@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.bigskyway.skyler.prairielandadventures.R;
-
 
 public class Unlock extends ActionBarActivity {
 

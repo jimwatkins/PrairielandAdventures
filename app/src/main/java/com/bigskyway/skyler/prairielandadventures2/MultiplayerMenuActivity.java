@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.bigskyway.skyler.prairielandadventures.R;
-
 
 public class MultiplayerMenuActivity extends Activity {
 

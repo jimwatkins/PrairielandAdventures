@@ -1,7 +1,5 @@
 package com.bigskyway.skyler.prairielandadventures2;
 
-import com.bigskyway.skyler.prairielandadventures.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

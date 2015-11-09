@@ -17,4 +17,7 @@
     <string name="title_activity_unlock">Unlocked Pete!</string>
     <string name="banner_ad_unit_id">ca-app-pub-2191584377614702/3740161072</string>
 
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

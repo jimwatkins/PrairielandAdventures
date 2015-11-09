@@ -8,8 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.bigskyway.skyler.prairielandadventures.R;
-
 
 public class Shop extends ActionBarActivity {
 
