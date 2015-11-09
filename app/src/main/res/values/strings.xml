@@ -2,6 +2,8 @@
 <resources>
 
     <string name="app_name">Prairieland Adventures</string>
+    <string name="app_id">1018609306784</string>
+    <string name="ldr_fastest_times_lvl1_id">CgkIoJniztIdEAIQBg</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_menu">PrairieLand Adventures Menu</string>
