@@ -26,7 +26,7 @@ public class ChallengeFirst extends ActionBarActivity {
     int health = 100;
     int snakeHealth = 100;
     Map<String,String> wordMap;
-    int timer = 4;
+    int timer;
     Handler timeHandler;
     TextView correctView;
     int roundLength = 4;
@@ -35,6 +35,9 @@ public class ChallengeFirst extends ActionBarActivity {
     int iEngWordCount;
     int iDamageAmount = 2;
     int iSnakeAttackDamage = 15;
+    int iTotalTime;
+    int iTotalPoints;
+    int iBeginPoints = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,20 +68,32 @@ public class ChallengeFirst extends ActionBarActivity {
     private void gameOver() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         AlertDialog dialog = null;
+        matchOver = true;
         if (health <= 0) {
 
-            builder.setMessage("Oops, the snakes won!")
+            builder.setMessage("Oops, the snakes won in " + iTotalTime + " seconds with " + snakeHealth + " health!")
                     .setTitle("Defeat")
                     .setPositiveButton("Ok", finishDialogueListener);
             dialog = builder.create();
             dialog.show();
         }
         else if (snakeHealth <= 0) {
-            builder.setMessage("Congratulations, you won!")
-                    .setTitle("Victory")
-                    .setPositiveButton("Ok", finishDialogueListener);
-            dialog = builder.create();
-            dialog.show();
+            iTotalPoints = (iBeginPoints-iTotalTime) + health;
+            if (health == 100) {
+                iTotalPoints = iTotalPoints+100;
+                builder.setMessage("Congratulations, you won in " + iTotalTime + " seconds and earned a 100 point bonus for losing no health!  Total Points:" + iTotalPoints)
+                        .setTitle("Victory")
+                        .setPositiveButton("Ok", finishDialogueListener);
+                dialog = builder.create();
+                dialog.show();
+            }
+            else {
+                    builder.setMessage("Congratulations, you won in " + iTotalTime + " seconds with " + health + " health!  Total Points:" + iTotalPoints)
+                            .setTitle("Victory")
+                            .setPositiveButton("Ok", finishDialogueListener);
+                    dialog = builder.create();
+                    dialog.show();
+                }
         }
     }
 
@@ -174,6 +189,7 @@ public class ChallengeFirst extends ActionBarActivity {
             snakeHealth = snakeHealth - iDamageAmount;
         }
 
+        iTotalTime = iTotalTime + (roundLength - timer);
         if (health <= 0 || snakeHealth <= 0) {
             updateHealth();
             gameOver();

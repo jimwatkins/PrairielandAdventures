@@ -57,7 +57,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.13"
             android:textColor="#0871ed"
-            android:onClick="launchUnit21FirstChallenge" />
+            android:onClick="launchUnit21FirstChallenge"
+            android:clickable="true" />
 
         <TextView
             android:layout_width="wrap_content"

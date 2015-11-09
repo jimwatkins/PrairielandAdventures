@@ -63,6 +63,7 @@ public class FirstLevel extends ActionBarActivity {
     private void gameOver() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         AlertDialog dialog = null;
+        matchOver = true;
         if (health == 0) {
 
             builder.setMessage("Oops, the snakes won")

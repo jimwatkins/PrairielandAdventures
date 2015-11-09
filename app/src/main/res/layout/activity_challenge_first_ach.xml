@@ -33,15 +33,6 @@
         android:layout_alignParentEnd="true"
         android:id="@+id/FrameLayout">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Health"
-            android:id="@+id/TxtHealth"
-            android:layout_gravity="left|bottom"
-            android:layout_marginTop="30dp" />
-
         <FrameLayout
             android:layout_width="118dp"
             android:layout_height="138dp"
@@ -49,8 +40,8 @@
             android:id="@+id/flaySnakeWord1">
 
             <ImageButton
-                android:layout_width="87dp"
-                android:layout_height="97dp"
+                android:layout_width="74dp"
+                android:layout_height="82dp"
                 android:layout_weight=".33"
                 android:background="@drawable/startersnaketwo"
                 android:id="@+id/imgSnake1"
@@ -58,7 +49,7 @@
 
             <TextView
                 android:layout_width="126dp"
-                android:layout_height="84dp"
+                android:layout_height="139dp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Text"
                 android:id="@+id/txtVSpan1"
@@ -69,7 +60,7 @@
                 android:layout_alignEnd="@+id/txtEnglishAnswer"
                 android:layout_alignBottom="@+id/textView3"
                 android:layout_gravity="left|center_vertical|bottom"
-                android:gravity="bottom|center_horizontal"
+                android:gravity="left|bottom|center_horizontal"
                 android:textColor="#010101" />
         </FrameLayout>
 
@@ -80,8 +71,8 @@
             android:id="@+id/flaySnakeWord2">
 
             <ImageButton
-                android:layout_width="65dp"
-                android:layout_height="105dp"
+                android:layout_width="59dp"
+                android:layout_height="95dp"
                 android:id="@+id/imgSnake2"
                 android:layout_weight=".33"
                 android:background="@drawable/startersnaketwo"
@@ -89,7 +80,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="86dp"
+                android:layout_height="150dp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Text"
                 android:id="@+id/txtVSpan2"
@@ -109,8 +100,8 @@
             android:id="@+id/flaySnakeWord3">
 
             <ImageButton
-                android:layout_width="87dp"
-                android:layout_height="107dp"
+                android:layout_width="74dp"
+                android:layout_height="91dp"
                 android:id="@+id/imgSnake3"
                 android:layout_weight=".33"
                 android:background="@drawable/startersnaketwo"
@@ -119,7 +110,7 @@
 
             <TextView
                 android:layout_width="103dp"
-                android:layout_height="77dp"
+                android:layout_height="149dp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Text"
                 android:id="@+id/txtVSpan3"
@@ -128,13 +119,13 @@
                 android:textSize="18dp"
                 android:layout_below="@+id/txtEnglishAnswer"
                 android:layout_gravity="bottom|center_horizontal"
-                android:gravity="bottom|center_horizontal"
+                android:gravity="bottom|center_horizontal|right"
                 android:textColor="#010101" />
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="158dp"
-            android:layout_height="137dp"
+            android:layout_height="152dp"
             android:layout_gravity="center_horizontal|bottom"
             android:id="@+id/flayHeroTimer">
 
@@ -142,7 +133,7 @@
                 android:layout_width="107dp"
                 android:layout_height="107dp"
                 android:id="@+id/ivHero"
-                android:layout_gravity="center_horizontal|bottom"
+                android:layout_gravity="center"
                 android:background="@drawable/ggggbehindview" />
 
             <TextView
@@ -153,6 +144,17 @@
                 android:id="@+id/txtTimer"
                 android:layout_gravity="top|center"
                 android:textColor="#010101" />
+
+            <TextView
+                android:layout_width="108dp"
+                android:layout_height="29dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Health"
+                android:id="@+id/TxtHealth"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginTop="30dp"
+                android:textColor="#010101"
+                android:gravity="bottom|center_horizontal" />
         </FrameLayout>
 
     </FrameLayout>
