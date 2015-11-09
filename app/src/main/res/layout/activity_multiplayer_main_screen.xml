@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.bigskyway.skyler.prairielandadventures2.FirstLevel"
+    android:id="@+id/RelativeLayout">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/llayMultPlayerMain"
+        android:weightSum="1"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Multiplayer Options"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#020202"
+            android:layout_weight="0.13"
+            android:textSize="@dimen/abc_text_size_display_1_material" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Unit Challenges"
+            android:id="@+id/tvUnitChallenge"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#030303"
+            android:layout_weight="0.11" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Unit 2.1"
+            android:id="@+id/tvUnit2_1"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.13"
+            android:textColor="#020202" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Challenge 1: Vocabulary"
+            android:id="@+id/tvU21Chal1"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.13"
+            android:textColor="#0871ed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Challenge 2: Demonstrative Adjectives and Pronouns"
+            android:id="@+id/tvU21Chal2"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.13"
+            android:textColor="#0871ed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Challenge 3: Preterite Tense"
+            android:id="@+id/tvU21Chal3"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.13"
+            android:textColor="#0871ed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="View Challenge Leaderboard"
+            android:id="@+id/tvViewLeaderboard"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.11" />
+    </LinearLayout>
+</RelativeLayout>

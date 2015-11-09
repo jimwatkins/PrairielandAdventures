@@ -48,8 +48,12 @@ public class MenuActivity extends Activity {
     }
 
     public void launchMultiplayer(View view) {
-        Toast toast = Toast.makeText(getApplicationContext(), "Functionality not available yet", Toast.LENGTH_LONG);
-        toast.show();
+//        Toast toast = Toast.makeText(getApplicationContext(), "Functionality not available yet", Toast.LENGTH_LONG);
+ //       toast.show();
+        Log.i("Launching Screen", "Multiplayer Main Menu");
+        Intent intent = new Intent(this, MultiplayerMenuActivity.class);
+        startActivity(intent);
+
     }
 
     public void quitGame(View view) {

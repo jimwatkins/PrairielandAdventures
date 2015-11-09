@@ -109,7 +109,7 @@
                 android:id="@+id/ibNounsCat7"
                 android:layout_gravity="top|left"
                 android:src="@drawable/island7"
-                android:onClick="launchFirstLevelNounsCat5" />
+                android:onClick="launchFirstLevelNounsCat7" />
 
             <ImageButton
                 android:layout_width="103dp"
