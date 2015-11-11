@@ -34,7 +34,7 @@
         android:id="@+id/FrameLayout">
 
         <FrameLayout
-            android:layout_width="118dp"
+            android:layout_width="96dp"
             android:layout_height="138dp"
             android:layout_gravity="left|center_vertical"
             android:id="@+id/flaySnakeWord1">
@@ -45,27 +45,27 @@
                 android:layout_weight=".33"
                 android:background="@drawable/startersnaketwo"
                 android:id="@+id/imgSnake1"
-                android:layout_gravity="top|left|center_vertical" />
+                android:layout_gravity="top|center_horizontal" />
 
             <TextView
-                android:layout_width="126dp"
+                android:layout_width="match_parent"
                 android:layout_height="139dp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Text"
                 android:id="@+id/txtVSpan1"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 android:textStyle="bold"
                 android:layout_below="@+id/txtEnglishAnswer"
                 android:layout_alignRight="@+id/txtEnglishAnswer"
                 android:layout_alignEnd="@+id/txtEnglishAnswer"
                 android:layout_alignBottom="@+id/textView3"
                 android:layout_gravity="left|center_vertical|bottom"
-                android:gravity="left|bottom|center_horizontal"
+                android:gravity="bottom|center_horizontal"
                 android:textColor="#010101" />
         </FrameLayout>
 
         <FrameLayout
-            android:layout_width="128dp"
+            android:layout_width="102dp"
             android:layout_height="149dp"
             android:layout_gravity="center_horizontal|top"
             android:id="@+id/flaySnakeWord2">
@@ -86,7 +86,7 @@
                 android:id="@+id/txtVSpan2"
                 android:layout_centerHorizontal="true"
                 android:textStyle="bold"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 android:layout_below="@+id/txtEnglishAnswer"
                 android:layout_gravity="bottom|center_horizontal"
                 android:gravity="bottom|center_horizontal"
@@ -94,7 +94,7 @@
         </FrameLayout>
 
         <FrameLayout
-            android:layout_width="113dp"
+            android:layout_width="91dp"
             android:layout_height="152dp"
             android:layout_gravity="right|center_vertical"
             android:id="@+id/flaySnakeWord3">
@@ -106,7 +106,7 @@
                 android:layout_weight=".33"
                 android:background="@drawable/startersnaketwo"
                 android:focusableInTouchMode="false"
-                android:layout_gravity="top|right|center_horizontal" />
+                android:layout_gravity="top|center_horizontal" />
 
             <TextView
                 android:layout_width="103dp"
@@ -116,22 +116,22 @@
                 android:id="@+id/txtVSpan3"
                 android:layout_centerHorizontal="false"
                 android:textStyle="bold"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 android:layout_below="@+id/txtEnglishAnswer"
                 android:layout_gravity="bottom|center_horizontal"
-                android:gravity="bottom|center_horizontal|right"
+                android:gravity="bottom|center_horizontal"
                 android:textColor="#010101" />
         </FrameLayout>
 
         <FrameLayout
-            android:layout_width="158dp"
+            android:layout_width="124dp"
             android:layout_height="152dp"
             android:layout_gravity="center_horizontal|bottom"
             android:id="@+id/flayHeroTimer">
 
             <ImageView
-                android:layout_width="107dp"
-                android:layout_height="107dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:id="@+id/ivHero"
                 android:layout_gravity="center"
                 android:background="@drawable/ggggbehindview" />
