@@ -29,11 +29,11 @@ public class ChallengeFirst extends ActionBarActivity {
     int timer;
     Handler timeHandler;
     TextView correctView;
-    int roundLength = 4;
+    int roundLength = 10;
     boolean matchOver = true;
     boolean bMoveBack = false;
     int iEngWordCount;
-    int iDamageAmount = 2;
+    int iDamageAmount = 4;
     int iSnakeAttackDamage = 15;
     int iTotalTime;
     int iTotalPoints;
@@ -263,92 +263,159 @@ public class ChallengeFirst extends ActionBarActivity {
     }
 
     private void moveSnakes() {
-        int r = randInt (1,3);
-         //TextView txtView;
+        int p = 0;
+        int as = 0;
+        int iFirstPos = 0;
+        int iSecondPos = 0;
+        int iAttackSnake = 0;
+        boolean bAlreadyAttacked = false;
+        //TextView txtView;
         ImageView ivSnake;
         FrameLayout flSnakeWord;
         FrameLayout.LayoutParams fParams;
         //FrameLayout.LayoutParams fTxtParams;
 
-        //get random integer to decide whether or not to attack (10% chance)
+        //get random integer to decide whether or not to attack (10% chance); attack if = 1
         int a = randInt(1,10);
-
-        //set location for first snake/word pair
-        flSnakeWord = (FrameLayout) findViewById(R.id.flaySnakeWord1);
-        //txtView = (TextView) findViewById(R.id.txtVSpan1);
-        ivSnake = (ImageView) findViewById(R.id.imgSnake1);
+        //if attack, randomly determine attacking snake (1,2, or 3)
         if (a == 1) {
-            ivSnake.setBackground(getResources().getDrawable(R.drawable.attackingsnakeposthreetwo));
-            //ivSnake.setImageDrawable(getResources().getDrawable(R.drawable.attackingsnakeposthreetwo));
-            //health = health - iSnakeAttackDamage;
-            }
-        else
-            ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
-        fParams = (FrameLayout.LayoutParams) flSnakeWord.getLayoutParams();
-        //fParams = (FrameLayout.LayoutParams) ivSnake.getLayoutParams();
-        //fTxtParams = (FrameLayout.LayoutParams) txtView.getLayoutParams();
-        r = randInt(1,3);
-        if (r==1){
-            fParams.gravity = Gravity.TOP | Gravity.LEFT;
-            //fTxtParams.gravity = Gravity.TOP | Gravity.LEFT;
-            }
-        else if (r==2){
-            fParams.gravity = Gravity.CENTER_VERTICAL | Gravity.LEFT;
-            //fTxtParams.gravity = Gravity.CENTER_VERTICAL | Gravity.LEFT;
-            }
-        else {
-            fParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
-            //fTxtParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+            iAttackSnake = randInt(1, 3);
         }
 
-        //set location for second snake/word pair
-        flSnakeWord = (FrameLayout) findViewById(R.id.flaySnakeWord2);
-        //txtView = (TextView) findViewById(R.id.txtVSpan1);
-        ivSnake = (ImageView) findViewById(R.id.imgSnake2);
-        if (a == 1)
-            ivSnake.setBackground(getResources().getDrawable(R.drawable.attackingsnakeposthreetwo));
-        else
-            ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
-        //ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
-        fParams = (FrameLayout.LayoutParams) flSnakeWord.getLayoutParams();
-        //fParams = (FrameLayout.LayoutParams) ivSnake.getLayoutParams();
-        //fTxtParams = (FrameLayout.LayoutParams) txtView.getLayoutParams();
-        r = randInt(1,2);
-        if (r==1){
-            fParams.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
-            //fTxtParams.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
-        }
-        else if (r==2){
-            fParams.gravity = Gravity.CENTER;
-            //fTxtParams.gravity = Gravity.CENTER;
+        for(int i=1; i<=3; i++) {
+
+            //get random integer to represent position for each snake
+            p = randInt(1, 8);
+            //if random # was the same as the position for the 1st or 2nd snake, get another #
+            while (p == iFirstPos || p == iSecondPos) {
+                p = randInt(1, 8);
+            }
+            //obtain frame object containing snake and word based on loop index
+            if (i == 1) {
+                iFirstPos = p;
+                flSnakeWord = (FrameLayout) findViewById(R.id.flaySnakeWord1);
+                //txtView = (TextView) findViewById(R.id.txtVSpan1);
+                ivSnake = (ImageView) findViewById(R.id.imgSnake1);
+            }
+            else if (i == 2) {
+                iSecondPos = p;
+                flSnakeWord = (FrameLayout) findViewById(R.id.flaySnakeWord2);
+                ivSnake = (ImageView) findViewById(R.id.imgSnake2);
+            }
+            else  {
+                flSnakeWord = (FrameLayout) findViewById(R.id.flaySnakeWord3);
+                ivSnake = (ImageView) findViewById(R.id.imgSnake3);
             }
 
-        //set location for third snake/word pair
-        flSnakeWord = (FrameLayout) findViewById(R.id.flaySnakeWord3);
-        //txtView = (TextView) findViewById(R.id.txtVSpan1);
-        ivSnake = (ImageView) findViewById(R.id.imgSnake3);
-        if (a == 1)
-            ivSnake.setBackground(getResources().getDrawable(R.drawable.attackingsnakeposthreetwo));
-        else
-            ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
-        //ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
-        fParams = (FrameLayout.LayoutParams) flSnakeWord.getLayoutParams();
-        //fParams = (FrameLayout.LayoutParams) ivSnake.getLayoutParams();
-        //fTxtParams = (FrameLayout.LayoutParams) txtView.getLayoutParams();
-        r = randInt(1,3);
-        if (r==1){
-            fParams.gravity = Gravity.RIGHT | Gravity.TOP;
-            //fTxtParams.gravity = Gravity.RIGHT | Gravity.TOP;
-        }
-        else if (r==2){
-            fParams.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
-            //fTxtParams.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
-        }
-        else {
-            fParams.gravity = Gravity.RIGHT | Gravity.BOTTOM;
-            //fTxtParams.gravity = Gravity.RIGHT | Gravity.BOTTOM;
+            //if current snake object is attacking snake, change image and subtract points from health
+            if (iAttackSnake == i) {
+                ivSnake.setBackground(getResources().getDrawable(R.drawable.attackingsnakeposthreetwo));
+                //ivSnake.setImageDrawable(getResources().getDrawable(R.drawable.attackingsnakeposthreetwo));
+                //health = health - iSnakeAttackDamage;
+            }
 
-        }
+            //now get position parameters object for frame object
+            fParams = (FrameLayout.LayoutParams) flSnakeWord.getLayoutParams();
+
+            //position frame object inside parent frame based on random position (1-8)
+            switch (p) {
+                case 1:
+                    p = 1;
+                    fParams.gravity = Gravity.TOP | Gravity.LEFT;
+                    break;
+                case 2:
+                    p = 1;
+                    fParams.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+                    break;
+                case 3:
+                    p = 1;
+                    fParams.gravity = Gravity.RIGHT | Gravity.TOP;
+                    break;
+                case 4:
+                    p = 1;
+                    fParams.gravity = Gravity.CENTER_VERTICAL | Gravity.LEFT;
+                    break;
+                case 5:
+                    p = 1;
+                    fParams.gravity = Gravity.CENTER;
+                    break;
+                case 6:
+                    p = 1;
+                    fParams.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
+                    break;
+                case 7:
+                    p = 1;
+                    fParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+                    break;
+                case 8:
+                    p = 1;
+                    fParams.gravity = Gravity.RIGHT | Gravity.BOTTOM;
+                    break;
+            } //end switch case
+        } //end for snakes 1 to 3
+
+//        r = randInt(1,3);
+//        if (r==1){
+//            fParams.gravity = Gravity.TOP | Gravity.LEFT;
+//            //fTxtParams.gravity = Gravity.TOP | Gravity.LEFT;
+//            }
+//        else if (r==2){
+//            fParams.gravity = Gravity.CENTER_VERTICAL | Gravity.LEFT;
+//            //fTxtParams.gravity = Gravity.CENTER_VERTICAL | Gravity.LEFT;
+//            }
+//        else {
+//            fParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+//            //fTxtParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+//        }
+//
+//        //set location for second snake/word pair
+//        flSnakeWord = (FrameLayout) findViewById(R.id.flaySnakeWord2);
+//        //txtView = (TextView) findViewById(R.id.txtVSpan1);
+//        ivSnake = (ImageView) findViewById(R.id.imgSnake2);
+//        if (a == 1)
+//            ivSnake.setBackground(getResources().getDrawable(R.drawable.attackingsnakeposthreetwo));
+//        else
+//            ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
+//        //ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
+//        fParams = (FrameLayout.LayoutParams) flSnakeWord.getLayoutParams();
+//        //fParams = (FrameLayout.LayoutParams) ivSnake.getLayoutParams();
+//        //fTxtParams = (FrameLayout.LayoutParams) txtView.getLayoutParams();
+//        r = randInt(1,2);
+//        if (r==1){
+//            fParams.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+//            //fTxtParams.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+//        }
+//        else if (r==2){
+//            fParams.gravity = Gravity.CENTER;
+//            //fTxtParams.gravity = Gravity.CENTER;
+//            }
+//
+//        //set location for third snake/word pair
+//        flSnakeWord = (FrameLayout) findViewById(R.id.flaySnakeWord3);
+//        //txtView = (TextView) findViewById(R.id.txtVSpan1);
+//        ivSnake = (ImageView) findViewById(R.id.imgSnake3);
+//        if (a == 1)
+//            ivSnake.setBackground(getResources().getDrawable(R.drawable.attackingsnakeposthreetwo));
+//        else
+//            ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
+//        //ivSnake.setBackground(getResources().getDrawable(R.drawable.startersnaketwo));
+//        fParams = (FrameLayout.LayoutParams) flSnakeWord.getLayoutParams();
+//        //fParams = (FrameLayout.LayoutParams) ivSnake.getLayoutParams();
+//        //fTxtParams = (FrameLayout.LayoutParams) txtView.getLayoutParams();
+//        r = randInt(1,3);
+//        if (r==1){
+//            fParams.gravity = Gravity.RIGHT | Gravity.TOP;
+//            //fTxtParams.gravity = Gravity.RIGHT | Gravity.TOP;
+//        }
+//        else if (r==2){
+//            fParams.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
+//            //fTxtParams.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
+//        }
+//        else {
+//            fParams.gravity = Gravity.RIGHT | Gravity.BOTTOM;
+//            //fTxtParams.gravity = Gravity.RIGHT | Gravity.BOTTOM;
+//
+//        }
 
     }
 
