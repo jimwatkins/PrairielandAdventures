@@ -90,7 +90,7 @@
             android:layout_weight="0.11" />
 
         <fragment android:name="com.bigskyway.skyler.prairielandadventures2.EnableGooglePlayFragment"
-            android:id="@+id/viewer"
+            android:id="@+id/fragmentGooglePlaySwitch"
             android:layout_weight="0.08"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

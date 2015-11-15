@@ -16,13 +16,30 @@ import com.google.android.gms.games.Player;
 
 
 public class MultiplayerMenuActivity extends FragmentActivity
-        implements EnableGooglePlayFragment.OnFragmentInteractionListener,
+        implements EnableGooglePlayFragment.Listener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     final String TAG = "MultiplayerMenuActivity";
 
+
+
     // Client used to interact with Google APIs
     private GoogleApiClient mGoogleApiClient;
+
+    // Are we currently resolving a connection failure?
+    private boolean mResolvingConnectionFailure = false;
+
+    // Has the user clicked the sign-in button?
+    private boolean mSignInClicked = false;
+
+    // Automatically start the sign-in flow when the Activity starts
+    private boolean mAutoStartSignInFlow = true;
+
+    // request codes we use when invoking an external activity
+    private static final int RC_RESOLVE = 5000;
+    private static final int RC_UNUSED = 5001;
+    private static final int RC_SIGN_IN = 9001;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +53,9 @@ public class MultiplayerMenuActivity extends FragmentActivity
                 .addApi(Plus.API).addScope(Plus.SCOPE_PLUS_LOGIN)
                 .addApi(Games.API).addScope(Games.SCOPE_GAMES)
                 .build();
+
+        EnableGooglePlayFragment pbf = (EnableGooglePlayFragment) getFragmentManager().findFragmentById(R.id.fragmentGooglePlaySwitch);
+        pbf.setListener(this);
 
 
     }
@@ -64,18 +84,9 @@ public class MultiplayerMenuActivity extends FragmentActivity
 
 
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 
     @Override
     public void onConnected(Bundle bundle) {
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
         Log.d(TAG, "onConnected(): connected to Google APIs");
         // Show sign-out button on main menu
 //        mMainMenuFragment.setShowSignInButton(false);
@@ -95,9 +106,43 @@ public class MultiplayerMenuActivity extends FragmentActivity
     }
 
     @Override
+    public void onConnectionSuspended(int i) {
+        Log.d(TAG, "onConnectionSuspended(): attempting to connect");
+        mGoogleApiClient.connect();
+    }
+
+    @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
+
+        Log.d(TAG, "onConnectionFailed(): attempting to resolve");
+        if (mResolvingConnectionFailure) {
+            Log.d(TAG, "onConnectionFailed(): already resolving");
+            return;
+        }
+
+        if (mSignInClicked || mAutoStartSignInFlow) {
+            mAutoStartSignInFlow = false;
+            mSignInClicked = false;
+            mResolvingConnectionFailure = true;
+//            if (!BaseGameUtils.resolveConnectionFailure(this, mGoogleApiClient, connectionResult,
+//                    RC_SIGN_IN, getString(R.string.signin_other_error))) {
+//                mResolvingConnectionFailure = false;
+//            }
+        }
 
     }
 
-
+    @Override
+    public void onConnectToGooglePlay() {
+        Log.i(TAG, "Connecting to google play");
+        mGoogleApiClient.connect();
+    }
+    @Override
+    public void onDisconnectFromGooglePlay() {
+        Log.i(TAG, "Disconnecting from google play");
+        Games.signOut(mGoogleApiClient);
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
 }
