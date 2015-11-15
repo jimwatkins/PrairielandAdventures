@@ -31,7 +31,18 @@ public class EnableGooglePlayFragment extends Fragment implements View.OnClickLi
 
     private Switch swGooglePlay;
 
-    private OnFragmentInteractionListener mListener;
+    private Listener mListener = null;
+
+    public interface Listener {
+        public void onConnectToGooglePlay();
+        public void onDisconnectFromGooglePlay();
+//        public void onStartGameRequested(boolean hardMode);
+//        public void onShowLeaderboardsRequested();
+//        public void onSignInButtonClicked();
+//        public void onSignOutButtonClicked();
+    }
+
+
 
     /**
      * Use this factory method to create a new instance of
@@ -78,23 +89,11 @@ public class EnableGooglePlayFragment extends Fragment implements View.OnClickLi
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    public void setListener(Listener l) {
+        mListener = l;
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
+
 
     @Override
     public void onDetach() {
@@ -108,6 +107,10 @@ public class EnableGooglePlayFragment extends Fragment implements View.OnClickLi
         Log.i("Google Play State", isPlayEnabled);
 
         if (swGooglePlay.isChecked() ) tryLogin();
+        if (swGooglePlay.isChecked())
+            mListener.onConnectToGooglePlay();
+        else
+            mListener.onDisconnectFromGooglePlay();
 
     }
 
