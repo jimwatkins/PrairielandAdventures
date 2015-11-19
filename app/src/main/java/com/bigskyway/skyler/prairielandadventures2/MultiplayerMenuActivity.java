@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.bigskyway.skyler.prairielandadventures2.util.BaseGameUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
@@ -20,8 +21,6 @@ public class MultiplayerMenuActivity extends FragmentActivity
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     final String TAG = "MultiplayerMenuActivity";
-
-
 
     // Client used to interact with Google APIs
     private GoogleApiClient mGoogleApiClient;
@@ -56,8 +55,6 @@ public class MultiplayerMenuActivity extends FragmentActivity
 
         EnableGooglePlayFragment pbf = (EnableGooglePlayFragment) getFragmentManager().findFragmentById(R.id.fragmentGooglePlaySwitch);
         pbf.setListener(this);
-
-
     }
 
     public void launchUnit21FirstChallenge (View view) {
@@ -124,12 +121,11 @@ public class MultiplayerMenuActivity extends FragmentActivity
             mAutoStartSignInFlow = false;
             mSignInClicked = false;
             mResolvingConnectionFailure = true;
-//            if (!BaseGameUtils.resolveConnectionFailure(this, mGoogleApiClient, connectionResult,
-//                    RC_SIGN_IN, getString(R.string.signin_other_error))) {
-//                mResolvingConnectionFailure = false;
-//            }
+            if (!BaseGameUtils.resolveConnectionFailure(this, mGoogleApiClient, connectionResult,
+                    RC_SIGN_IN, getString(R.string.signin_other_error))) {
+                mResolvingConnectionFailure = false;
+            }
         }
-
     }
 
     @Override
