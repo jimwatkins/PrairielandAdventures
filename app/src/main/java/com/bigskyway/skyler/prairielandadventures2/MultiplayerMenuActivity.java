@@ -8,16 +8,18 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.bigskyway.skyler.prairielandadventures2.util.BaseGameActivity;
 import com.bigskyway.skyler.prairielandadventures2.util.BaseGameUtils;
+import com.bigskyway.skyler.prairielandadventures2.util.GameHelper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.games.Player;
-
+import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 
 public class MultiplayerMenuActivity extends FragmentActivity
-        implements EnableGooglePlayFragment.Listener,
+        implements EnableGooglePlayFragment.Listener, GameHelper.GameHelperListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     final String TAG = "MultiplayerMenuActivity";
@@ -42,7 +44,7 @@ public class MultiplayerMenuActivity extends FragmentActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
 
         setContentView(R.layout.activity_multiplayer_main_screen);
 
@@ -50,12 +52,13 @@ public class MultiplayerMenuActivity extends FragmentActivity
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(Plus.API).addScope(Plus.SCOPE_PLUS_LOGIN)
-                .addApi(Games.API).addScope(Games.SCOPE_GAMES)
                 .build();
 
         EnableGooglePlayFragment pbf = (EnableGooglePlayFragment) getFragmentManager().findFragmentById(R.id.fragmentGooglePlaySwitch);
         pbf.setListener(this);
-    }
+
+        super.onCreate(savedInstanceState);
+}
 
     public void launchUnit21FirstChallenge (View view) {
         Log.i("Launching Screen", "Challenge One: Vocabulary");
@@ -131,14 +134,49 @@ public class MultiplayerMenuActivity extends FragmentActivity
     @Override
     public void onConnectToGooglePlay() {
         Log.i(TAG, "Connecting to google play");
+        mSignInClicked = true;
         mGoogleApiClient.connect();
     }
+
     @Override
     public void onDisconnectFromGooglePlay() {
         Log.i(TAG, "Disconnecting from google play");
-        Games.signOut(mGoogleApiClient);
+//        Games.signOut(mGoogleApiClient);
         if (mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
+        mSignInClicked = false;
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent intent) {
+
+
+        if (requestCode == RC_SIGN_IN) {
+            mSignInClicked = false;
+            mResolvingConnectionFailure = false;
+            if (resultCode == RESULT_OK) {
+                mGoogleApiClient.connect();
+            } else {
+                // Bring up an error dialog to alert the user that sign-in
+                // failed. The R.string.signin_failure should reference an error
+                // string in your strings.xml file that tells the user they
+                // could not be signed in, such as "Unable to sign in."
+                BaseGameUtils.showActivityResultError(this,
+                        requestCode, resultCode, R.string.signin_failure);
+            }
+        }
+    }
+
+    @Override
+    public void onSignInFailed() {
+        Log.i(TAG, "Sign in failed");
+    }
+
+    @Override
+    public void onSignInSucceeded() {
+        Log.i(TAG, "Sign in succeeded");
     }
 }

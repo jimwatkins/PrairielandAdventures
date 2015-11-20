@@ -14,7 +14,6 @@
         android:checked="false"
         android:textColor="@color/ripple_material_light"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:textAlignment="textEnd" />
+        android:layout_marginRight="10dp" />
 
 </FrameLayout>
