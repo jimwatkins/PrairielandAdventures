@@ -24,7 +24,7 @@ import com.google.android.gms.games.Player;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 
 public class MultiplayerMenuActivity extends FragmentActivity
-        implements EnableGooglePlayFragment.Listener, GameHelper.GameHelperListener,
+        implements EnableGooglePlayFragment.Listener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     final String TAG = "MultiplayerMenuActivity";
@@ -63,6 +63,7 @@ public class MultiplayerMenuActivity extends FragmentActivity
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(Plus.API).addScope(Plus.SCOPE_PLUS_LOGIN)
+                .addApi(Games.API).addScope(Games.SCOPE_GAMES)
                 .build();
 
         EnableGooglePlayFragment pbf = (EnableGooglePlayFragment) getFragmentManager().findFragmentById(R.id.fragmentGooglePlaySwitch);
@@ -173,20 +174,11 @@ public class MultiplayerMenuActivity extends FragmentActivity
         }
     }
 
-    @Override
-    public void onSignInFailed() {
-        Log.i(TAG, "Sign in failed");
-    }
-
-    @Override
-    public void onSignInSucceeded() {
-        Log.i(TAG, "Sign in succeeded");
-    }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (!mResolvingConnectionFailure) {  // more about this later
+        if ( mSignInClicked && !mResolvingConnectionFailure) {  // more about this later
             mGoogleApiClient.connect();
         }
     }
