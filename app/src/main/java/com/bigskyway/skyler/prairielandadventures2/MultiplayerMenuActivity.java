@@ -24,13 +24,11 @@ import com.google.android.gms.games.Player;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 
 public class MultiplayerMenuActivity extends FragmentActivity
-        implements EnableGooglePlayFragment.Listener,
+        implements EnableGooglePlayFragment.Listener, GameHelper.GameHelperListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     final String TAG = "MultiplayerMenuActivity";
 
-    // Client used to interact with Google APIs
-    private GoogleApiClient mGoogleApiClient;
 
     // Are we currently resolving a connection failure?
     private boolean mResolvingConnectionFailure = false;
@@ -50,8 +48,11 @@ public class MultiplayerMenuActivity extends FragmentActivity
     private static final int REQUEST_RESOLVE_ERROR = 1001;
     // Unique tag for the error dialog fragment
     private static final String DIALOG_ERROR = "dialog_error";
-    // Bool to track whether the app is already resolving an error
-    private boolean mResolvingError = false;
+
+    // The game helper object. This class is mainly a wrapper around this object.
+    protected GameHelper mHelper;
+
+    private boolean mDebugLog = true;
 
 
     @Override
@@ -59,17 +60,31 @@ public class MultiplayerMenuActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_multiplayer_main_screen);
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(Plus.API).addScope(Plus.SCOPE_PLUS_LOGIN)
-                .addApi(Games.API).addScope(Games.SCOPE_GAMES)
-                .build();
 
         EnableGooglePlayFragment pbf = (EnableGooglePlayFragment) getFragmentManager().findFragmentById(R.id.fragmentGooglePlaySwitch);
         pbf.setListener(this);
 
+        if (mHelper == null) {
+            getGameHelper();
+        }
+        mHelper.setup(this);
+
+        enableDebugLog(true);
+
 }
+
+    public GameHelper getGameHelper() {
+        if (mHelper == null) {
+            mHelper = new GameHelper(this, GameHelper.CLIENT_GAMES);
+            mHelper.enableDebugLog(mDebugLog);
+        }
+        return mHelper;
+    }
+
+    protected GoogleApiClient getApiClient() {
+        return mHelper.getApiClient();
+    }
+
 
     public void launchUnit21FirstChallenge (View view) {
         Log.i("Launching Screen", "Challenge One: Vocabulary");
@@ -106,7 +121,7 @@ public class MultiplayerMenuActivity extends FragmentActivity
 //        mWinFragment.setShowSignInButton(false);
 
         // Set the greeting appropriately on main menu
-        Player p = Games.Players.getCurrentPlayer(mGoogleApiClient);
+        Player p = Games.Players.getCurrentPlayer(getApiClient());
         String displayName;
         if (p == null) {
             Log.w(TAG, "mGamesClient.getCurrentPlayer() is NULL!");
@@ -114,12 +129,13 @@ public class MultiplayerMenuActivity extends FragmentActivity
         } else {
             displayName = p.getDisplayName();
         }
+        Log.d(TAG, "onConnected(): Current Player is - " + displayName);
     }
 
     @Override
     public void onConnectionSuspended(int i) {
         Log.d(TAG, "onConnectionSuspended(): attempting to connect");
-        mGoogleApiClient.connect();
+        getApiClient().connect();
     }
 
     @Override
@@ -133,7 +149,7 @@ public class MultiplayerMenuActivity extends FragmentActivity
                 result.startResolutionForResult(this, REQUEST_RESOLVE_ERROR);
             } catch (IntentSender.SendIntentException e) {
                 // There was an error with the resolution intent. Try again.
-                mGoogleApiClient.connect();
+                getApiClient().connect();
             }
         } else {
             // Show dialog using GoogleApiAvailability.getErrorDialog()
@@ -144,48 +160,50 @@ public class MultiplayerMenuActivity extends FragmentActivity
 
     @Override
     public void onConnectToGooglePlay() {
-        Log.i(TAG, "Connecting to google play");
+        Log.i(TAG, "onConnectToGooglePlay");
         mSignInClicked = true;
-        mGoogleApiClient.connect();
+
+        // Make sure the app is not already connected or attempting to connect
+        mHelper.beginUserInitiatedSignIn();
+
+//        if (!getApiClient().isConnecting() &&
+//                !getApiClient().isConnected()) {
+//            getApiClient().connect();
+//        }
     }
 
     @Override
     public void onDisconnectFromGooglePlay() {
-        Log.i(TAG, "Disconnecting from google play");
+        Log.i(TAG, "onDisconnectingFromGooglePlay:");
+        mHelper.signOut();
+
 //        Games.signOut(mGoogleApiClient);
-        if (mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
-        }
+//        if (getApiClient().isConnected()) {
+//            getApiClient().disconnect();
+//        }
+
         mSignInClicked = false;
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_RESOLVE_ERROR) {
-            mResolvingConnectionFailure = false;
-            if (resultCode == RESULT_OK) {
-                // Make sure the app is not already connected or attempting to connect
-                if (!mGoogleApiClient.isConnecting() &&
-                        !mGoogleApiClient.isConnected()) {
-                    mGoogleApiClient.connect();
-                }
-            }
-        }
+
+        mHelper.onActivityResult(requestCode, resultCode, data);
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        if ( mSignInClicked && !mResolvingConnectionFailure) {  // more about this later
-            mGoogleApiClient.connect();
-        }
+//        if ( mSignInClicked && !mResolvingConnectionFailure) {  // more about this later
+//            mGoogleApiClient.connect();
+//        }
     }
 
     @Override
     protected void onStop() {
-        mGoogleApiClient.disconnect();
+//        mGoogleApiClient.disconnect();
         super.onStop();
     }
 
@@ -202,7 +220,19 @@ public class MultiplayerMenuActivity extends FragmentActivity
 
     /* Called from ErrorDialogFragment when the dialog is dismissed. */
     public void onDialogDismissed() {
-        mResolvingError = false;
+        Log.i(TAG, "onDialogDismissed:");
+//        mResolvingError = false;
+    }
+
+    @Override
+    public void onSignInFailed() {
+        Log.i(TAG, "onSignInFailed:");
+
+    }
+
+    @Override
+    public void onSignInSucceeded() {
+        Log.i(TAG, "onSignInSucceeded:");
     }
 
     /* A fragment to display an error dialog */
@@ -223,5 +253,11 @@ public class MultiplayerMenuActivity extends FragmentActivity
         }
     }
 
+    private void enableDebugLog(boolean enabled) {
+        mDebugLog = true;
+        if (mHelper != null) {
+            mHelper.enableDebugLog(enabled);
+        }
+    }
 
 }
