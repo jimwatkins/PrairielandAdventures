@@ -16,6 +16,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bigskyway.skyler.prairielandadventures2.util.GameHelper;
+import com.google.android.gms.games.Games;
+
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,11 +36,12 @@ public class ChallengeFirst extends ActionBarActivity {
     boolean matchOver = true;
     boolean bMoveBack = false;
     int iEngWordCount;
-    int iDamageAmount = 4;
+    int iDamageAmount = 25;
     int iSnakeAttackDamage = 15;
     int iTotalTime;
     int iTotalPoints;
     int iBeginPoints = 1000;
+    private GameHelper mGameHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,7 @@ public class ChallengeFirst extends ActionBarActivity {
                 iTotalPoints = iTotalPoints+100;
                 builder.setMessage("Congratulations, you won in " + iTotalTime + " seconds and earned a 100 point bonus for losing no health!  Total Points:" + iTotalPoints)
                         .setTitle("Victory")
+                        .setNeutralButton("Post Score", postScoreListener)
                         .setPositiveButton("Ok", finishDialogueListener);
                 dialog = builder.create();
                 dialog.show();
@@ -90,11 +95,31 @@ public class ChallengeFirst extends ActionBarActivity {
             else {
                     builder.setMessage("Congratulations, you won in " + iTotalTime + " seconds with " + health + " health!  Total Points:" + iTotalPoints)
                             .setTitle("Victory")
+                            .setNeutralButton("Post Score", postScoreListener)
                             .setPositiveButton("Ok", finishDialogueListener);
                     dialog = builder.create();
                     dialog.show();
                 }
         }
+    }
+
+    protected DialogInterface.OnClickListener postScoreListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            postScore();
+        }
+    };
+
+    private void postScore() {
+        if (mGameHelper == null) {
+            mGameHelper = new GameHelper(this, GameHelper.CLIENT_GAMES);
+        }
+
+        if (!mGameHelper.isSignedIn()) {
+            mGameHelper.beginUserInitiatedSignIn();
+        }
+
+        Games.Leaderboards.submitScore(mGameHelper.getApiClient(), "CgkIoJniztIdEAIQCA", iTotalPoints);
     }
 
     protected DialogInterface.OnClickListener finishDialogueListener = new DialogInterface.OnClickListener() {
@@ -171,7 +196,9 @@ public class ChallengeFirst extends ActionBarActivity {
             if (timer > 0) {
                 timer = timer - 1;
                 updateTimer();
-                moveSnakes();
+                if (timer%2==0) {
+                    moveSnakes();
+                }
                 timeHandler.postDelayed(timeCheck, 1000);
             }
             else if (timer == 0 ) {
@@ -570,8 +597,12 @@ public class ChallengeFirst extends ActionBarActivity {
 
 
         return words;
-
-
-
     }
+
+    @Override
+    protected void onStop() {
+        finishMatch();
+        super.onStop();
+    }
+
 }

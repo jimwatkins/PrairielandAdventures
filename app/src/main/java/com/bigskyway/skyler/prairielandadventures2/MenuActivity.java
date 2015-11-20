@@ -30,6 +30,7 @@ public class MenuActivity extends Activity {
         PublisherAdView mPublisherAdView = (PublisherAdView) findViewById(R.id.publisherAdView);
         PublisherAdRequest adRequest = new PublisherAdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("35ABEB0E1DB55194")
                 .build();
         mPublisherAdView.loadAd(adRequest);
 
@@ -56,6 +57,7 @@ public class MenuActivity extends Activity {
     }
 
     public void quitGame(View view) {
+
         finish();
     }
 
