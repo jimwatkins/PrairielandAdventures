@@ -79,12 +79,20 @@ public class EnableGooglePlayFragment extends Fragment implements View.OnClickLi
 
     }
 
+    public void setIsPlayEnabled(boolean b) {
+            swGooglePlay.setChecked(b);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_enable_google_play, container, false);
         swGooglePlay = (Switch) view.findViewById(R.id.switchGooglePlay);
+        if ( Boolean.getBoolean(isPlayEnabled) )
+            swGooglePlay.setChecked(true);
+
+
         swGooglePlay.setOnClickListener(this);
         return view;
     }

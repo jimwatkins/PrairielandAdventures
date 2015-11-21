@@ -2,6 +2,7 @@ package com.bigskyway.skyler.prairielandadventures2;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,8 +16,12 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bigskyway.skyler.prairielandadventures2.util.BaseGameActivity;
+import com.bigskyway.skyler.prairielandadventures2.util.BaseGameUtils;
 import com.bigskyway.skyler.prairielandadventures2.util.GameHelper;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 
 import java.io.InputStream;
@@ -25,7 +30,9 @@ import java.util.Map;
 import java.util.Random;
 
 
-public class ChallengeFirst extends ActionBarActivity {
+public class ChallengeFirst extends BaseGameActivity   {
+    final String TAG = "ChallengeFirst";
+
     int health = 100;
     int snakeHealth = 100;
     Map<String,String> wordMap;
@@ -41,7 +48,7 @@ public class ChallengeFirst extends ActionBarActivity {
     int iTotalTime;
     int iTotalPoints;
     int iBeginPoints = 1000;
-    private GameHelper mGameHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +63,13 @@ public class ChallengeFirst extends ActionBarActivity {
 //        wordMap = getWords("spanish_verbs.csv");
 
 
+
         // start time handler
         timeHandler = new Handler();
         timeHandler.postDelayed(timeCheck, 1000);
         startMatch();
     }
+
 
     private void startMatch() {
         matchOver = false;
@@ -109,17 +118,23 @@ public class ChallengeFirst extends ActionBarActivity {
             postScore();
         }
     };
+    
 
     private void postScore() {
-        if (mGameHelper == null) {
-            mGameHelper = new GameHelper(this, GameHelper.CLIENT_GAMES);
+
+        if (!getGameHelper().isSignedIn()) {
+            getGameHelper().beginUserInitiatedSignIn();
         }
 
-        if (!mGameHelper.isSignedIn()) {
-            mGameHelper.beginUserInitiatedSignIn();
+        if (getApiClient().isConnected()) {
+            Games.Leaderboards.submitScore(getApiClient(), "CgkIoJniztIdEAIQCA", iTotalPoints);
+            Toast toast = Toast.makeText(getApplicationContext(), "Score published to leaderboard.", Toast.LENGTH_SHORT);
+            toast.show();
         }
-
-        Games.Leaderboards.submitScore(mGameHelper.getApiClient(), "CgkIoJniztIdEAIQCA", iTotalPoints);
+        else {
+            Toast toast = Toast.makeText(getApplicationContext(), "Unable to published to leaderboard, please check connection", Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     protected DialogInterface.OnClickListener finishDialogueListener = new DialogInterface.OnClickListener() {
@@ -604,5 +619,20 @@ public class ChallengeFirst extends ActionBarActivity {
         finishMatch();
         super.onStop();
     }
+
+    @Override
+    public void onSignInFailed() {
+        BaseGameUtils.makeSimpleDialog(this, "Connecting to google playe services failed.");
+    }
+
+    @Override
+    public void onSignInSucceeded() {
+        Log.i(TAG, "onSignInSucceeded");
+    }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        getGameHelper().onActivityResult(requestCode, resultCode, data);
+//    }
 
 }
