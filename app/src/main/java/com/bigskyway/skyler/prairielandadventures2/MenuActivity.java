@@ -3,8 +3,12 @@ package com.bigskyway.skyler.prairielandadventures2;
 import com.bigskyway.skyler.prairielandadventures2.util.SystemUiHider;
 
 import android.app.Activity;
+import android.app.admin.DeviceAdminInfo;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -20,6 +24,8 @@ import com.google.android.gms.ads.doubleclick.PublisherAdView;
  * @see SystemUiHider
  */
 public class MenuActivity extends Activity {
+    private static final String TAG = "MenuActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +33,13 @@ public class MenuActivity extends Activity {
 
         setContentView(R.layout.activity_menu);
 
+        String android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+
+        Log.i(TAG, "android id" + android_id);
         PublisherAdView mPublisherAdView = (PublisherAdView) findViewById(R.id.publisherAdView);
         PublisherAdRequest adRequest = new PublisherAdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("35ABEB0E1DB55194")
+                .addTestDevice("0E1B81CCBD95B202E3DAFE577764188D") // malta emulator
                 .build();
         mPublisherAdView.loadAd(adRequest);
 
