@@ -29,5 +29,7 @@
 
     <string name="signin_other_error">There was an issue with sign in.  Please try again later.</string>
     <string name="signin_failure">\"Signin Failure\"</string>
+    <string name="achievements_not_available">Please sign in to view acheivements</string>
+    <string name="leaderboards_not_available">Please sign in to view leaderboards.</string>
 
 </resources>

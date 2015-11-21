@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.View;
 
 import com.bigskyway.skyler.prairielandadventures2.util.BaseGameActivity;
+import com.bigskyway.skyler.prairielandadventures2.util.BaseGameUtils;
 import com.bigskyway.skyler.prairielandadventures2.util.GameHelper;
+import com.google.android.gms.games.Games;
 
 
 public class MultiplayerMenuActivity extends BaseGameActivity implements EnableGooglePlayFragment.Listener {
@@ -17,6 +19,7 @@ public class MultiplayerMenuActivity extends BaseGameActivity implements EnableG
     private boolean mSignInClicked;
 
     private EnableGooglePlayFragment enableGooglePlayFragment;
+    private int RC_UNUSED = 5001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,23 @@ public class MultiplayerMenuActivity extends BaseGameActivity implements EnableG
 //        startActivity(intent);
 //    }
 
+    public void showAchievements(View view) {
+        if (isSignedIn()) {
+            startActivityForResult(Games.Achievements.getAchievementsIntent(getApiClient()),
+                    RC_UNUSED);
+        } else {
+            BaseGameUtils.makeSimpleDialog(this, getString(R.string.achievements_not_available)).show();
+        }
+    }
+
+    public void showLeaderboards(View view) {
+        if (isSignedIn()) {
+            startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent(getApiClient()),
+                    RC_UNUSED);
+        } else {
+            BaseGameUtils.makeSimpleDialog(this, getString(R.string.leaderboards_not_available)).show();
+        }
+    }
 
 
     @Override
