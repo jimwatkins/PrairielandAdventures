@@ -40,6 +40,7 @@ public class MenuActivity extends Activity {
         PublisherAdRequest adRequest = new PublisherAdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .addTestDevice("0E1B81CCBD95B202E3DAFE577764188D") // malta emulator
+                .addTestDevice("ABA71106435390A99E82D5A4E0DEA4FE")
                 .build();
         mPublisherAdView.loadAd(adRequest);
 
