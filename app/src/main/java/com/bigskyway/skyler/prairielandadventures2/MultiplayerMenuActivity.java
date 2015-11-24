@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.bigskyway.skyler.prairielandadventures2.util.BaseGameActivity;
 import com.bigskyway.skyler.prairielandadventures2.util.BaseGameUtils;
@@ -21,6 +24,10 @@ public class MultiplayerMenuActivity extends BaseGameActivity implements EnableG
     private EnableGooglePlayFragment enableGooglePlayFragment;
     private int RC_UNUSED = 5001;
 
+    private Spinner spUnitSelection;
+
+    ArrayAdapter<String> aa;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +36,29 @@ public class MultiplayerMenuActivity extends BaseGameActivity implements EnableG
 
         enableGooglePlayFragment = (EnableGooglePlayFragment) getFragmentManager().findFragmentById(R.id.fragmentGooglePlaySwitch);
         enableGooglePlayFragment.setListener(this);
+
+        spUnitSelection = (Spinner) findViewById(R.id.spUnit);
+
+        aa = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item,
+                new String[] {"Unit 2.1", "Unit 2.2", "Unit 2.3" });
+
+
+        spUnitSelection.setAdapter(aa);
+
+
+//        spUnitSelection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                spUnitSelection.setSelection(position, true);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                spUnitSelection.setSelection(0, true);
+//            }
+//        });
+
 
     }
 
