@@ -40,7 +40,8 @@ public class MenuActivity extends Activity {
         PublisherAdRequest adRequest = new PublisherAdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .addTestDevice("0E1B81CCBD95B202E3DAFE577764188D") // malta emulator
-                .addTestDevice("ABA71106435390A99E82D5A4E0DEA4FE")
+                .addTestDevice("ABA71106435390A99E82D5A4E0DEA4FE") // legendary (bridger)
+                .addTestDevice("3258F83588E1FFF7C017042C612D297D") // W510
                 .build();
         mPublisherAdView.loadAd(adRequest);
 
