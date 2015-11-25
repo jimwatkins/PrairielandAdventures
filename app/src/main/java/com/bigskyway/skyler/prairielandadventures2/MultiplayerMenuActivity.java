@@ -26,7 +26,7 @@ public class MultiplayerMenuActivity extends BaseGameActivity implements EnableG
 
     private Spinner spUnitSelection;
 
-    ArrayAdapter<String> aa;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +39,9 @@ public class MultiplayerMenuActivity extends BaseGameActivity implements EnableG
 
         spUnitSelection = (Spinner) findViewById(R.id.spUnit);
 
-        aa = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item,
-                new String[] {"Unit 2.1", "Unit 2.2", "Unit 2.3" });
+        ArrayAdapter<CharSequence> aa = ArrayAdapter.createFromResource(this, R.array.chapters_array, android.R.layout.simple_spinner_item);
+
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
         spUnitSelection.setAdapter(aa);

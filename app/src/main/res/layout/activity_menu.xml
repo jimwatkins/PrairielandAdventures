@@ -66,8 +66,6 @@
             android:background="@android:color/transparent" />
 
 
-
-
     </LinearLayout>
 
     <com.google.android.gms.ads.doubleclick.PublisherAdView

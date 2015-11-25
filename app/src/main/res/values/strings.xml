@@ -32,4 +32,10 @@
     <string name="achievements_not_available">Please sign in to view acheivements</string>
     <string name="leaderboards_not_available">Please sign in to view leaderboards.</string>
 
+    <string-array name="chapters_array">
+        <item>Unit 2.1</item>
+        <item>Unit 2.2</item>
+        <item>Unit 2.3</item>
+    </string-array>
+
 </resources>
