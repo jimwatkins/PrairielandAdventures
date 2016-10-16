@@ -4,11 +4,17 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.games.Games;
 
 
 /**
@@ -19,7 +25,8 @@ import android.widget.Switch;
  * Use the {@link EnableGooglePlayFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EnableGooglePlayFragment extends Fragment implements View.OnClickListener {
+public class EnableGooglePlayFragment extends Fragment implements View.OnClickListener,
+        GoogleApiClient.ConnectionCallbacks {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "isPlayEnabled";
@@ -32,6 +39,23 @@ public class EnableGooglePlayFragment extends Fragment implements View.OnClickLi
     private Switch swGooglePlay;
 
     private Listener mListener = null;
+
+//    GoogleApiClient mGoogleApiClient = new GoogleApiClient
+//            .Builder(PrairieLandsApplication.getContext())
+//            .addApi(Games.API)
+//            .addConnectionCallbacks(this)
+//            .build();
+
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
 
     public interface Listener {
         public void onConnectToGooglePlay();
@@ -114,7 +138,11 @@ public class EnableGooglePlayFragment extends Fragment implements View.OnClickLi
         isPlayEnabled = Boolean.toString(swGooglePlay.isChecked());
         Log.i("Google Play State", isPlayEnabled);
 
-        if (swGooglePlay.isChecked() ) tryLogin();
+//        if (swGooglePlay.isChecked() )
+//            tryLogin();
+//        else
+//            disconnect();
+
         if (swGooglePlay.isChecked())
             mListener.onConnectToGooglePlay();
         else
@@ -122,10 +150,13 @@ public class EnableGooglePlayFragment extends Fragment implements View.OnClickLi
 
     }
 
-    private void tryLogin() {
-
-
-    }
+//    private void tryLogin() {
+//        mGoogleApiClient.connect();
+//    }
+//
+//    private void disconnect() {
+//        mGoogleApiClient.disconnect();
+//    }
 
     /**
      * This interface must be implemented by activities that contain this
