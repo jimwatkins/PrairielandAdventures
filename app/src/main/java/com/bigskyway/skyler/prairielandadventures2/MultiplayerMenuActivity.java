@@ -47,17 +47,17 @@ public class MultiplayerMenuActivity extends BaseGameActivity implements EnableG
         spUnitSelection.setAdapter(aa);
 
 
-//        spUnitSelection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                spUnitSelection.setSelection(position, true);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//                spUnitSelection.setSelection(0, true);
-//            }
-//        });
+        spUnitSelection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                spUnitSelection.setSelection(position, true);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                spUnitSelection.setSelection(0, true);
+            }
+        });
 
 
     }
