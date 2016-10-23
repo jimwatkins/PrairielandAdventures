@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -17,13 +18,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.bigskyway.skyler.prairielandadventures2.util.BaseGameActivity;
+import com.bigskyway.skyler.prairielandadventures2.util.BaseGameUtils;
+import com.bigskyway.skyler.prairielandadventures2.util.GameHelper;
+import com.google.android.gms.games.Games;
+
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 
-public class FirstLevel extends ActionBarActivity {
+public class FirstLevel extends BaseGameActivity {
     int health = 100;
     int snakeHealth = 100;
     Map<String,String> wordMap;
@@ -78,7 +84,16 @@ public class FirstLevel extends ActionBarActivity {
                     .setPositiveButton("Ok", finishDialogueListener);
             dialog = builder.create();
             dialog.show();
+
+            postToLeaderboard(health);
         }
+    }
+
+    protected void postToLeaderboard(int score) {
+
+        String board_id = getString(R.string.leaderboard_id_fastest);
+        Games.Leaderboards.submitScore(this.getApiClient(), board_id, score);
+
     }
 
     protected DialogInterface.OnClickListener finishDialogueListener = new DialogInterface.OnClickListener() {
@@ -468,6 +483,16 @@ public class FirstLevel extends ActionBarActivity {
         return words;
 
 
+
+    }
+
+    @Override
+    public void onSignInFailed() {
+
+    }
+
+    @Override
+    public void onSignInSucceeded() {
 
     }
 }

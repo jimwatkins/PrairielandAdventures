@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.bigskyway.skyler.prairielandadventures2.util.BaseGameActivity;
 import com.bigskyway.skyler.prairielandadventures2.util.BaseGameUtils;
@@ -26,6 +27,7 @@ public class MultiplayerMenuActivity extends BaseGameActivity implements EnableG
 
     private Spinner spUnitSelection;
 
+    private String sUnitSelected;
 
 
     @Override
@@ -40,18 +42,17 @@ public class MultiplayerMenuActivity extends BaseGameActivity implements EnableG
         spUnitSelection = (Spinner) findViewById(R.id.spUnit);
 
         ArrayAdapter<CharSequence> aa = ArrayAdapter.createFromResource(this, R.array.chapters_array, android.R.layout.simple_spinner_item);
-
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-
         spUnitSelection.setAdapter(aa);
-
 
         spUnitSelection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spUnitSelection.setSelection(position, true);
-            }
+                sUnitSelected = (String) spUnitSelection.getItemAtPosition(position);
+                Toast.makeText(getApplicationContext(), sUnitSelected, Toast.LENGTH_SHORT).show();
+             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
