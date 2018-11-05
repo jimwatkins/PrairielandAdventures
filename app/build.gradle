@@ -1,8 +1,9 @@
+//noinspection GradleCompatible
 apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "23.0.2"
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.bigskyway.skyler.prairielandadventures2"
         minSdkVersion 17
@@ -25,12 +26,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:support-v4:24.2.1'
-    compile 'com.google.android.gms:play-services:9.6.1'
-    compile 'com.google.android.gms:play-services-ads:9.6.1'
-    compile 'com.google.android.gms:play-services-games:9.6.1'
-    compile 'com.google.android.gms:play-services-plus:9.6.1'
-    compile 'com.google.android.gms:play-services-analytics:9.6.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:24.0.0'
+    implementation 'com.android.support:support-v4:24.0.0'
+//    implementation 'com.google.android.gms:play-services:16.0.1'
+    implementation 'com.google.android.gms:play-services-ads:16.0.0'
+    implementation 'com.google.android.gms:play-services-games:16.0.0'
+    implementation 'com.google.android.gms:play-services-plus:16.0.0'
+    implementation 'com.google.android.gms:play-services-analytics:16.0.0'
 }
