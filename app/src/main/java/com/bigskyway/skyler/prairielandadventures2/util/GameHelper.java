@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.Api.ApiOptions.NoOptions;
@@ -330,6 +331,7 @@ public class GameHelper implements GoogleApiClient.ConnectionCallbacks,
     public boolean isSignedIn() {
         return mGoogleApiClient != null && mGoogleApiClient.isConnected();
     }
+
 
     /** Returns whether or not we are currently connecting */
     public boolean isConnecting() {

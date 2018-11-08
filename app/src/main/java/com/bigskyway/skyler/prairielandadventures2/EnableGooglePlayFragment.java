@@ -15,6 +15,7 @@ import android.widget.Switch;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
+import com.google.android.gms.common.*;
 
 
 /**
@@ -125,6 +126,7 @@ public class EnableGooglePlayFragment extends Fragment implements View.OnClickLi
     public void setListener(Listener l) {
         mListener = l;
     }
+
 
 
 

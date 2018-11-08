@@ -2,6 +2,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyPassword 'bridger00'
+            storeFile file('/Users/Jim_Watkins/SkylerRestoredKeyStore.jks')
+            storePassword 'bridger00'
+            keyAlias 'skyler\'s signing key'
+        }
+    }
     compileSdkVersion 26
     buildToolsVersion '28.0.3'
     defaultConfig {
@@ -19,6 +27,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
     productFlavors {
@@ -32,7 +44,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.google.android.gms:play-services-base:16.0.1'
     implementation 'com.google.android.gms:play-services-identity:16.0.0'
-
     implementation 'com.google.android.gms:play-services-ads:16.0.0'
     implementation 'com.google.android.gms:play-services-games:16.0.0'
     implementation 'com.google.android.gms:play-services-plus:16.0.0'

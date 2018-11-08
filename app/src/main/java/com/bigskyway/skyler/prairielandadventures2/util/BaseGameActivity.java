@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 /**
@@ -129,6 +130,7 @@ public abstract class BaseGameActivity extends FragmentActivity implements
     protected boolean isSignedIn() {
         return mHelper.isSignedIn();
     }
+
 
     protected void beginUserInitiatedSignIn() {
         mHelper.beginUserInitiatedSignIn();
