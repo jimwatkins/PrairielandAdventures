@@ -18,30 +18,23 @@ import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherAdView;
 
 /**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
+ * This is the main Game Menu
  *
- * @see SystemUiHider
  */
 public class MenuActivity extends Activity {
     private static final String TAG = "MenuActivity";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, "Creating main menu" );
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_menu);
 
-        String android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
-        Log.i(TAG, "android id" + android_id);
+        Log.i(TAG, "MainMenu fetching ad" );
         PublisherAdView mPublisherAdView = (PublisherAdView) findViewById(R.id.publisherAdView);
         PublisherAdRequest adRequest = new PublisherAdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("0E1B81CCBD95B202E3DAFE577764188D") // malta emulator
-                .addTestDevice("ABA71106435390A99E82D5A4E0DEA4FE") // legendary (bridger)
-                .addTestDevice("3258F83588E1FFF7C017042C612D297D") // W510
                 .build();
         mPublisherAdView.loadAd(adRequest);
 
@@ -64,13 +57,10 @@ public class MenuActivity extends Activity {
         Log.i("Launching Screen", "Multiplayer Main Menu");
         Intent intent = new Intent(this, MultiplayerMenuActivity.class);
         startActivity(intent);
-
     }
 
     public void quitGame(View view) {
-
         finish();
     }
-
 
 }
