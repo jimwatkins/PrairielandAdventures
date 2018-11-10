@@ -6,14 +6,16 @@
     <!-- TODO: Update blank fragment layout -->
 
     <Switch
+        android:id="@+id/switchGooglePlay"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Google Play"
-        android:id="@+id/switchGooglePlay"
         android:layout_gravity="center"
-        android:checked="false"
-        android:textColor="@color/ripple_material_light"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        android:layout_marginRight="10dp"
+        android:background="?android:attr/colorSecondary"
+        android:checked="false"
+        android:padding="@dimen/activity_vertical_margin"
+        android:text="Google Play"
+        android:textColor="?android:attr/colorForeground" />
 
 </FrameLayout>

@@ -33,6 +33,13 @@
     <string name="leaderboards_not_available">Please sign in to view leaderboards.</string>
     <string name="leaderboard_id_fastest">CgkIoJniztIdEAIQBg</string>
     <string name="leaderboards_id_highest">CgkIoJniztIdEAIQCA</string>
+    <string name="unit_challenges">Unit Challenges</string>
+    <string name="multiplayer_options">Multiplayer Options</string>
+    <string name="challenge_2_ndemonstrative_adjectives_amp_pronouns"><![CDATA[Challenge 2\nDemonstrative Adjectives & Pronouns]]></string>
+    <string name="challenge_3_npreterite_tense">Challenge 3\nPreterite Tense</string>
+    <string name="challenge_1_nvocabulary">Challenge 1\nVocabulary</string>
+    <string name="view_challenge_leaderboard">View Challenge Leaderboard</string>
+    <string name="view_achievements">View Achievements</string>
 
 
     <string-array name="chapters_array">

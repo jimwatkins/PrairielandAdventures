@@ -29,24 +29,24 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 
-public class MultiplayerMenuActivity extends Activity implements EnableGooglePlayFragment.Listener {
+    public class MultiplayerMenuActivity extends Activity implements EnableGooglePlayFragment.Listener {
 
-    private static final int RC_SIGN_IN = 1000 ;
-    private static final int RC_ACHIEVEMENT_UI = 1001 ;
-    private static final int RC_LEADERBOARD_UI = 1002;
-    final String TAG = "MultiplayerMenuActivity";
+        private static final int RC_SIGN_IN = 1000 ;
+        private static final int RC_ACHIEVEMENT_UI = 1001 ;
+        private static final int RC_LEADERBOARD_UI = 1002;
+        final String TAG = "MultiplayerMenuActivity";
 
-    private boolean mSignInClicked;
+        private boolean mSignInClicked;
 
-    private EnableGooglePlayFragment enableGooglePlayFragment;
-    private int RC_UNUSED = 5001;
+        private EnableGooglePlayFragment enableGooglePlayFragment;
+        private int RC_UNUSED = 5001;
 
-    private Spinner spUnitSelection;
+        private Spinner spUnitSelection;
 
-    private String sUnitSelected;
+        private String sUnitSelected;
 
 
-    @Override
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
